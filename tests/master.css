@@ -1,0 +1,180 @@
+/* CSS Document */
+body{ margin:0; padding:0; font:12px Arial, Helvetica, sans-serif; color:#000000; background:url(../images/body-bg.gif) repeat-x left top;}
+h1, h2, h3, h4, h5, h6, img, form, table, input, label{ margin:0; padding:0;}
+img{ border:none;}
+a{ color:#92AB43; text-decoration:none; outline:none;}
+a:hover{ color:#a8a8a8; text-decoration:underline;}
+.txt-c{ text-align:center;}
+.txt-r{ text-align:right;}
+.txt-l{ text-align:left;}
+.fr{ float:right;}
+.fl{ float:left;}
+.clear{ clear:both;}
+#page{ width:1002px; margin:7px auto 0 auto;background:#fff;}
+.padding-T{ padding:70px 0 0 0;}
+.padding-L{ padding:0 105px 0 0;}
+h3{ margin:0; padding:0; font-weight:normal; font-size:13px;}
+h3 img{ vertical-align:middle; padding:0 5px 0 0;}
+/*-----------------------------header css-----------------------------*/
+#header{ width:1002px; margin:0 auto; background:#fff;}
+#header-top{ background:url(../images/top-curve.gif) no-repeat left top; height:9px; width:1002px;}
+#welcome-txt{ float:left; width:800px; padding:2px 0 16px 20px;}
+#logo{ float:right; width:129px; margin:0 20px 0 0; padding:12px 0 0px 0;}
+.color-orange{ color:#cc9012;}
+.color-green{ color:#92ab43;}
+.color-brown{ color:#cc9012;}
+.txt-size-20{ font-size:20px;}
+.txt-size-14{ font-size:14px;}
+.navigation{width:1002px; position:relative;}
+.nav-tab{ width:1002px; margin:0 auto; background:#cc9012; border-bottom:4px solid #94bc1c; height:35px;}
+
+.nav-tab ul{ margin:0; padding:0px; }
+.nav-tab ul li{ margin:0; padding:0 0 0 0; list-style-type:none; display:inline; font-size:13px; color:#fff; line-height:35px;}
+/*------------new css added for strip for all browser-------------------------------
+.nav-tab{ width:100%; margin:0 auto; background:#cc9012; border-bottom:4px solid #94bc1c; height:35px; position:relative; z-index:10; top:-2px; left:0;}
+.nav-tab ul{ margin:0 0 0 173px; padding:0px; }
+.nav-tab ul li{ margin:0; padding:0 0 0 0; list-style-type:none; display:inline; font-size:13px; color:#fff; line-height:35px;}*/
+/*---------------------end here------------------------------------------------------*/
+.nav-tab ul li a{ margin:0; padding:0 10px; list-style-type:none; float:left; font-size:13px; color:#fff; line-height:35px;  display:block; text-decoration:none;}
+.nav-tab ul li a:hover{ margin:0; padding:0 10px; list-style-type:none; float:left; font-size:13px; color:#fff; line-height:35px; background:#92ab43; display:block; text-decoration:none;}
+.nav-tab ul li a.active{ margin:0; padding:0 10px; list-style-type:none; float:left; font-size:13px; color:#fff; line-height:35px; background:#92ab43; display:block; text-decoration:none; cursor:default;}
+.sub-nav{ width:1002px; background:url(../images/grey-nav.gif) repeat-x left top; height:25px;line-height:25px;  z-index:6; margin:0 auto ;}
+/*----------------new css added for subnav strip for all browser--------------------------
+.sub-nav{ width:1002px; background:url(../images/grey-nav.gif) repeat-x left top; height:25px;line-height:25px;  z-index:6; margin:38px auto 0 auto ;}*/
+/*--------------------------end here--------------------------------------------------------*/
+.sub-nav ul{ margin:0; padding:0;}
+.sub-nav ul li{ list-style-type:none; margin:0; padding:0 5px; display:inline; font-size:11px; color:#000;}
+.sub-nav ul li a.active{ list-style-type:none; margin:0; padding:0 5px; display:inline; font-size:11px; color:#000; background:url(../images/green-arrow.gif) no-repeat 0 50%;}
+
+.logout{ position:absolute; font-size:12px; color:#fff; right:10px; top:10px; z-index:10;}
+.logout a{ color:#fff; text-decoration:none;}
+.logout a:hover{ color:#fff; text-decoration:underline;}
+.logout img{ vertical-align:middle; padding:0 2px 0 0;}
+/*------------------------content css-----------------------------------*/
+.wraper{ width:1002px; margin:0px auto 0 auto;-webkit-box-shadow:0px 0px 3px 0px #d3d3d3; box-shadow: 0px 0px 3px 0px #d3d3d3;-moz-box-shadow: 0px 0px 3px 0px #d3d3d3;}
+.wraper h1{ font-size:18px;font-weight:normal;margin:0 0 0 0px; padding:10px 0 10px 10px; width:550px;}
+.wraper span.right{color: #000033; float: right;font-size: 11px;padding: 0 10px 0 0;text-align: center;}
+/*-------------------new css added for wraper--------------------------------
+.warper{ width:1002px; margin:-39px auto 0 auto;-webkit-box-shadow:0px 0px 3px 0px #d3d3d3; box-shadow: 0px 0px 3px 0px #d3d3d3;-moz-box-shadow: 0px 0px 3px 0px #d3d3d3;}*/
+/*---------------------end here---------------------------------------------*/
+.left-container{ width:201px; float:left; margin:30px 0 0 8px; background:url(../images/serchbg.gif) no-repeat left top;}
+.left-container ul{ margin:0; padding:13px 0 0 13px;}
+.left-container ul li{ margin:0; padding:5px 0 0 10px; list-style-type:none; display:block; background:url(../images/green-arrow.gif) no-repeat 0 10px;}
+.left-container ul li ul{ margin:0; padding:0px 0 0 5px; font-size:11px;}
+.left-container ul li ul li{ margin:0; padding:5px 0 0 10px; list-style-type:none; display:block; background:url(../images/green-arrow.gif) no-repeat 0 10px;}
+
+.left-container h2{ margin:0; padding:13px 0 17px 13px; font-size:13px; font-weight:normal; color:#000;}
+.left-container h3{ margin:0; padding:60px 0 17px 13px;}
+.search-form{ margin:0; padding:0 0 0 13px; font-size:11px;}
+.search-form form{ margin:0; padding:0;}
+.search-form p{ margin:0; padding:0 0 5px 0;}
+.search-form-select{ width:155px; border:1px solid #e3e9ef; margin:0; padding:0; font-size:11px;}
+.search-form input[type=text]{ width:155px; border:1px solid #e3e9ef; margin:0; padding:0;font-size:11px;}
+optgroup.normal{ font-weight:normal; font-style:italic;}
+
+.calander-fld{ width:100px; border:1px solid #e3e9ef; margin:0; padding:0; font-size:11px;}
+.search-form img{ vertical-align:text-bottom; padding-left:5px;}
+.padding-R{ padding-right:18px;}
+.padding-right{ padding-right:3px;}
+.global-button{ background:url(../images/button-green-bg.gif) repeat-x left top; margin:0 5px 0 0; padding:0px 10px;cursor:pointer;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-o-border-radius:5px; border:1px solid #a1c080; font-size:13px; color:#000; height:20px;}
+.right-box{ width:720px; float:right; margin:30px 35px 0 0;}
+.right-box h1{font-size:18px; padding:0 0px 10px 0px; margin:0 0 0px 0; font-weight:normal;}
+.right-box h1 span{ float:right;}
+/*-------------------------------list view-----------------------*/
+.event-box{ width:auto; margin:0 10px; }
+
+.table-heading{ font-size:14px; color:#666666; background:#e0f2ab; height:38px;}
+.event-box table{border-radius:5px;-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px;-o-border-radius:5px; border:solid #efefef; background:#fff; border-width:1px 1px 0px 1px;}
+.event-box table tr td{border-bottom:1px solid #efefef; border-right:1px solid #efefef; line-height:16px; padding:5px; vertical-align:top;}
+.bottom-bg ul{padding:0; margin:0 0 0 0px;}
+.bottom-bg ul li{margin:0; padding:0; list-style-type:none; display:inline; font-size:12px;}
+.bottom-bg ul li.padding{padding-right:20px;}
+.bottom-bg ul li.padding1{padding-right:150px;}
+.bottom-bg{background:url(../images/list-view-table-bottom-bg.gif) repeat-x left top; padding:0 10px; margin:0px 0 0 0; line-height:25px;border:solid #efefef;border-width:0px 1px 1px 1px;}
+.previous{ color:#b7a8a8;}
+/*-------------------------------footer css----------------------*/
+#footer{ background:url(../images/footer-bg.gif) repeat-x left top; width:1002px; margin:0 auto; font-size:11px; color:#004101; text-align:center; line-height:50px;}
+/*---------------------------------list page form------------------------*/
+.top-icons{ float:right; padding:10px 10px 0 0; text-align:center}
+.top-icons img{padding:0 15px;}
+.top-icons tr td{ padding:0 4px;}
+.top-filters{border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-o-border-radius:5px; border:1px solid #E5E6E6;background:#E5E6E6;margin: 10px;text-align: right; padding:0 0 0 5px; line-height:30px;}
+.right-box form{ margin:0 0 10px 0;}
+#list-form{ font-size:11px; color:#000;}
+#list-form h2{ font-size:16px; color:#27282E; border-top:2px solid #94bc1c; padding:6px 0px 6px 20px; font-weight:normal; margin:10px 0 0 0;}
+#list-form h2 img{ margin:0; padding:0 5px 0px 0;}
+#list-form p{ clear:both;}
+#list-form label{ display:block; margin:5px 0; float:left; padding:0 0 0 0px;}
+#list-form label span{width:195px; float:left; text-align:left; display:block; font-weight:bold; }
+#list-form label span.nrmltxt{font-weight:normal; }
+#list-form label span cite{ font-weight:normal; color:#666; font-style:normal; padding-left:10px; display:block}
+#list-form input[type=text]{  font-size:11px; padding:1px 0;}
+#list-form input.add-item{width:135px;}
+#list-form select{ border:1px solid #e3e9ef; font-size:11px; width:155px; padding:1px 0;}
+#list-form input[type=checkbox]{padding:0; vertical-align:middle; margin:0 5px;}
+#list-form input[type=radio]{padding:0; vertical-align:middle; margin:0 5px;}
+#list-form img{ vertical-align:middle;}
+#list-form h3{ font-size:14px; color:#94bc1c; padding:0 0px 0px 5px;font-weight:normal; clear:both;}
+#list-form h4{ font-size:12px; color:#000; padding:5px 0px 0px 5px;font-weight:bold;}
+.optional-button{ background:url(../images/button-optional-bg.gif) repeat-x left top; margin:3px 5px; padding:2px 15px;cursor:pointer;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-o-border-radius:5px; border:1px solid #bfbfbf; font-size:13px; color:#000;}
+.optional-button:hover{ background:url(../images/button-optional-bg-hover.gif) repeat-x left top; margin:3px 5px; padding:2px 15px;cursor:pointer;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-o-border-radius:5px; border:1px solid #bfbfbf; font-size:13px; color:#000;}
+.filed-area{ width:130px; margin:0; padding:0;}
+
+/*------------client admin-------------------------*/
+.client-adminbox{ width:764px; margin:0 auto 0 auto;}
+.grey-box{ width:342px; height:233px; float:left; margin:15px 20px 10px 20px;}
+.grey-box-top{ background:url(../images/client-admin-box-top.gif) no-repeat left top; width:342px; height:9px;}
+.grey-box-bg{ background:url(../images/client-admin-box-bg.gif) repeat-x left top; width:340px; border:solid #e0e3e8; border-width:0 1px; min-height:200px;}
+.grey-box-botm{ background:url(../images/client-admin-box-botm.gif) no-repeat left top; width:342px; height:37px;}
+.grey-box h5{ margin:0; padding:10px 0 5px 10px; font-size:22px; color:#cc9012; line-height:75px;}
+.grey-box h5 img{ float:left; vertical-align:middle; padding:0 10px 0 0; }
+.grey-box p{ margin:0; padding:0px 30px; font-size:12px; color:#666;}
+.powerd-by{ padding:10px 0 10px 10px;}
+.login-button{ background:url(../images/login-btn-bg.gif) repeat-x left top; margin:5px; padding:2px 15px;cursor:pointer;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-o-border-radius:5px; border:1px solid #7b5401; font-size:12px; color:#fff;}
+.selct-client{ text-align:center; font-size:18px; padding:80px 0 80px 0;}
+.selct-client fieldset{ border:1px solid #c1c1c1;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-o-border-radius:5px;}
+.selct-client legend{ color:#CC9012; font-weight:normal; margin:0; padding:0 8px;}
+.selct-client select{ width:200px; margin:50px 0 50px 5px;}
+/*---------------------list view month -------------------------------------*/
+.listview-month{ width:720px; margin:0 0 10px 0;}
+.listview-month-l{ background:url(../images/left-curve.gif) no-repeat left top; width:5px; height:41px; float:left;}
+.listview-month-r{ background:url(../images/right-curve.gif) no-repeat left top; width:5px; height:41px; float:right;}
+.listview-month-bg{ background:url(../images/bg-curve.gif) repeat-x left top; width:710px; height:41px; float:left;}
+.lft-right-arrow{ font-size:24px; color:#fff; font-weight:bold; padding:0 10px; line-height:41px;}
+.mnth-txt{ font-size:16px; font-weight:bold; color:#fff;}
+
+.listview-month select{ margin:0 10px 0 0;}
+.mnth-week-day{border:1px solid #a9c64e;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-o-border-radius:5px; background:#a9c64e; margin:12px 0 0 0;}
+.mnth-week-day ul{ margin:0; padding:0;}
+.mnth-week-day ul li{ margin:0; padding:0 12px; list-style-type:none;display:block; float:left; line-height:26px; text-align:center; background:url(../images/bdr-rght.gif) no-repeat right center;}
+.mnth-week-day ul li.bdrno{ background:none;}
+.mnth-week-day ul li a{ color:#fff; text-decoration:none;}
+.mnth-week-day ul li a:hover{ color:#666666; text-decoration:none;}
+.mnth-week-day ul li a.active{ color:#666666; text-decoration:none; cursor:auto;}
+.slect-client{ max-width:160px;}
+.event-table-heading{ font-size:14px; color:#666666; background:#e5e6e6; height:38px;}
+.add-event-box{ width:auto; margin:0 5px;}
+.add-private-data{ display:none;}
+.mandatory{ color:#F00; padding:0 0 0 2px;}
+.global-client{ padding:0 0 0 10px;}
+.redtxt{ color:#F00; font-style:italic; }
+
+.listform-field{ border:1px solid #e3e9ef; font-size:11px;  padding:1px 0; width:155px;}
+/*.errors{ color:#ff0000; padding:0 0 8px 0;}*/
+/*-----------------------css added on 10/24/2011-------------------------------*/
+.errors{ color:#ff0000; padding:0 0 0px 0;}
+ul.errors{ color:#ff0000; padding:0 0 0px 160px; text-align:left;list-style-type:none; margin:0;}
+ul li.errors { color:#ff0000; padding:0;  margin:0;}
+.infomsg{color:#ff0000; padding:0 0 0 0; text-align:center;}
+.green-line{border-top: solid 2px #94BC1C; text-align:center;}
+/*----------------------------cal css------------------------------------------*/
+.cal{margin:-3px 0 0 0; vertical-align:middle; cursor:pointer;}
+/*-----------------------------new css added on 22nov 2011-------------------------*/
+.saved-search-box{border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-o-border-radius:5px; border:1px solid #f4f0f0; background:#fafafa; margin:5px 0 5px 0;}
+.saved-search-box h2{ margin:0; padding:8px 0 5px 13px; font-size:13px; font-weight:normal; color:#000;}
+.saved-search-box{ font-size:11px; color:#54575c;}
+.saved-search-box ul{ margin:0 0 6px 0; padding:0;}
+.saved-search-box ul li{ margin:0 7px; padding:6px 0; background:url(../images/dotted-line.gif) repeat-x left bottom; list-style-type:none; }
+.width140{ width:140px;}
+.width40{ width:40px;}
+
