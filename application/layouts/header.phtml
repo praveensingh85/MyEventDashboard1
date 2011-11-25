@@ -1,0 +1,114 @@
+ <!-- header start -->
+ <?php
+ $session = new Zend_Session_Namespace('Med.auth');
+ $registry = Zend_Registry::getInstance();
+ $login = $registry['sess_user_id'];
+ $user = $registry['Med_User'];
+ $admin = $registry['Med_Admin'];
+ $whattodo = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
+ $whattodo1 = Zend_Controller_Front::getInstance()->getRequest()->getModuleName().Zend_Controller_Front::getInstance()->getRequest()->getControllerName().Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+ if($admin)
+ {
+	$admin_user = Doctrine_Query::create()
+		    ->from('Med_Model_AdminUsers u')
+		   ->where('u.au_id= ?',$login);
+	 $result = $admin_user->fetchArray(); 
+	 $fname = $result['0']['au_fname'];
+	 $lname = $result['0']['au_lname'];
+	 
+	 if($admin=="super_admin")
+	 {
+		$type = "(Super Admin)";
+		 }
+	 elseif($admin=="super_user")
+	 {
+		 $type = "(Super User)";
+		 }
+	 else
+	 {
+		$type = "(Client Admin)"; 
+		// find company id
+		$comp_id = $result['0']['au_cmp_id']; 
+		 }	 
+	 }
+ else
+ {
+	 $user = Doctrine_Query::create()
+		    ->from('Med_Model_ClientUsers u')
+		   ->where('u.cu_id= ?',$login);
+	 $result = $user->fetchArray(); 
+	 $fname = $result['0']['cu_fname'];
+	 $lname = $result['0']['cu_lname'];
+	 $type ="";
+	 // find company id
+	 $comp_id = $result['0']['cu_cmp_id'];
+	 } 
+ // Query for Company Logo
+    if($comp_id)
+	{
+    $comp = Doctrine_Query::create()
+		    ->from('Med_Model_Companies u')
+		   ->where('u.cmp_id= ?',$comp_id);
+	 $result_comp = $comp->fetchArray(); 
+	 $logo = $result_comp['0']['cmp_logo'];
+	 $title = $result_comp['0']['cmp_name'];
+	 $alt = $result_comp['0']['cmp_name'];
+	}
+ ?>		
+  <div id="header">
+    <div id="header-top"></div>
+    <div id="welcome-txt"><span class="color-orange txt-size-20"><?php echo $this->translate("Welcome to myeventdashboard.com");?> </span><br />
+      <span class="color-orange txt-size-14"><?php echo $this->translate("The event industry's first database and calendar tool");?> </span><br />
+      <span class="color-green text-size-14"><?php echo $this->translate($fname.'&nbsp;'.$lname);
+	  if($session->user_type !='super_user'  && $session->user_type !='super_admin' )
+	{ echo ",&nbsp;".$this->translate($title);}?>&nbsp;<?php echo $this->translate($type);?></span></div>
+    <div id="logo">
+     <!-- Logo according to client -->
+     <?php
+	    
+        if($session->user_type !='super_user'  && $session->user_type !='super_admin' )
+	{
+	   
+	 ?> 
+    <img src="<?php echo $this->baseUrl() . '/uploads/'.$logo;?>" alt="<?php echo $title;?>"  title="<?php echo $alt;?>" />
+    <?php }?>
+    </div>
+    <br class="clear" />
+        <!-- navigation start -->
+<div class="navigation">
+  <div class="nav-tab">
+  <!-- navigation according to client admin,super user and user -->
+   <?php
+  
+   // shows if super admin and super user not loged in
+   
+   echo $this->navigation()->menu();
+	
+    ?>
+   <!-- navigation according to client admin,super user and user  end-->
+  </div>
+  
+<div class="logout">
+ <?php 
+ if($session->user_type =='super_admin' && $whattodo == 'admin' )
+	{ ?>
+    <a href="#"><?php echo $this->translate('Client Management');?></a> |
+    
+    <?php } 
+ if($whattodo1!="adminindexindex" &&($session->user_type =='super_user'  ||$session->user_type =='super_admin' ||$session->user_type =='client_admin') )
+	{ ?>
+    <a href="<?php echo $this->url(array('module'=>'admin','controller'=>'index','action'=>'index'))?>"><?php echo $this->translate('View Admin Dashboard');?></a> |
+    <?php }
+	
+	if($session->user_type =='client_admin' && $whattodo == 'admin' )
+	{ ?>
+     <a href="#"><?php echo $this->translate('Profile Management');?></a> |
+    <a href="<?php echo $this->url(array('module'=>'default','controller'=>'event','action'=>'listviews'))?>"><?php echo $this->translate('View Event Dashboard');?> </a> |
+    <?php } ?>
+ <a href="<?php echo $this->url(array('controller'=>'index','module'=>'default','action'=>'logout'))?>" title="Log Out"><img src="<?php echo $this->baseUrl() . '/images/lock.png'?>"  alt="" class="mrgin-l" /></a>
+</div>
+
+</div>
+<!-- navigation end -->
+  </div>
+  <!-- header close --> 

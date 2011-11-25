@@ -1,0 +1,261 @@
+<div class="wraper"> 
+<div class="fl"> <h1><?php echo $this->escape($this->publicinfo['event_name']);?></h1> </div>  <div class="top-icons"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+  
+   
+   <td><a href="#" onclick="javascript:history.go(-1)"><img src="<?php echo $this->baseUrl() . '/images/back-icon.png'?>"  alt="Back" title="Back" /></a><br />Back</td>
+  <?php
+  // check if company id exist
+  $session = new Zend_Session_Namespace('Med.auth');
+   if($session->comp_id){
+   ?>
+    <td><a href="#"><img src="<?php echo $this->baseUrl() . '/images/subscribe-icon.png'?>"  alt="Subscribe" title="Subscribe" /></a><br />
+Subscribe</td>
+<td><a href="#"><img src="<?php echo $this->baseUrl() . '/images/unsubscribe-icon.png'?>"  alt="Unsubscribe" title="Unsubscribe" /></a><br />
+Unsubscribe</td>
+<td><a href="<?php echo $this->baseUrl(). '/admin/event/edit/event_id/'.$this->publicinfo['event_id'].'/prop/'.$this->prop;?>"><img src="<?php echo $this->baseUrl() . '/images/edit-icon.png'?>"  alt="Edit" title="Edit" /></a><br />
+Edit</td>
+<?php }
+else{
+?>
+    <td><a href="<?php echo $this->baseUrl(). '/admin/event/edit/event_id/'.$this->publicinfo['event_id']; ?>"><img src="<?php echo $this->baseUrl() . '/images/edit-icon.png'?>"  alt="Edit" title="Edit" /></a><br />
+Edit</td>
+<?php }?>
+    <td><a href="#"><img src="<?php echo $this->baseUrl() . '/images/score-icon.png'?>"  alt="Score" title="Score" /></a><br />
+Score Event</td>
+ <td><a href="#"><img src="<?php echo $this->baseUrl() . '/images/portfolio-icon.png'?>"  alt="Portfolio" title="Portfolio" /></a><br />
+Portfolio</td> 
+    <td><a href="<?php echo $this->baseUrl(). '/admin/event/del/event_id/'.$this->publicinfo['event_id']; ?>/prop/<?php echo $this->prop; ?>"><img src="<?php echo $this->baseUrl() . '/images/deletecross-icon.png'?>"  alt="Delete" title="Delete" /></a><br />
+Delete</td>
+ 
+  </tr>
+  
+</table></div>
+<br class="clear" />
+    
+    <div class="add-event-box" id="list-form">
+   <?php $date = new Med_Viewhelper_Dateformatstyles ; 
+         $session = new Zend_Session_Namespace('Med.auth');
+   ?>
+    
+    <form action="" id="form" name="form" method="post">
+    <h2><img src="<?php echo $this->baseUrl().'/images/down-arrow.gif'?>">Basic Information</h2>
+     
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top" width="123px">&nbsp;</td>
+    <td valign="top" >
+    <?php
+   // check if company id exist
+   if($session->comp_id && (!is_null($this->privateinfo['emp_status'])) && ($this->privateinfo['emp_status']!="")){
+   ?> <label><span>Event Status</span> <span class="nrmltxt"><?php echo $this->privateinfo['emp_status'];?></span></label> <?php }?>
+    <label><span>Event Name</span> <span class="nrmltxt"><?php echo  $this->escape($this->publicinfo['event_name']);?></span></label>
+    <label><span>Event Producer</span><span class="nrmltxt"><?php echo $this->escape($this->publicinfo['event_producer']);?></span></label>
+    <label><span>In person / Virtual</span><span class="nrmltxt"><?php echo $this->publicinfo['person_virtual'];?></span></label>
+
+    <label><span>Start Date</span><span class="nrmltxt"><?php echo $date->datetimestyle($this->publicinfo['start_date']);?></span></label>
+    <label><span>End Date </span><span class="nrmltxt"><?php echo $date->datetimestyle($this->publicinfo['end_date']);?></span></label>
+    <label><span>Exhibit Start Date</span><span class="nrmltxt"><?php echo $date->datetimestyle($this->publicinfo['exhibit_start_date']);?></span></label>
+    <label><span>Exhibit End Date </span><span class="nrmltxt"><?php echo $date->datetimestyle($this->publicinfo['exhibit_end_date']);?></span></label>
+    <label><span>Event URL</span><span class="nrmltxt"><a href="<?php echo $this->escape($this->publicinfo['event_url']);?>" target="_blank"><?php echo $this->escape($this->publicinfo['event_url']);?></a></span></label>
+    <label><span>Event Focus</span> <span class="nrmltxt"><?php echo nl2br($this->escape($this->publicinfo['focus']));?></span></label>
+    
+       </td>
+    <td valign="top" width="432px"><label><span>Co-located Event </span> 
+      <span class="nrmltxt"> <?php echo nl2br($this->escape($this->publicinfo['colocated_url']));?></span>
+      </label>
+      <label><span>Event Venue </span><span class="nrmltxt"><?php echo $this->escape($this->publicinfo['venue']);?></span></label>
+      <label><span>Region </span><span class="nrmltxt"><?php echo $this->escape($this->publicinfo['region']);?></span>
+  </label>
+      
+  <label><span>Country</span>  <span class="nrmltxt"><?php echo $this->publicinfo['country'];?></span></label>
+  <label><span>State</span><span class="nrmltxt"><?php echo $this->publicinfo['state'];?></span> </label>
+  <label><span>City</span><span class="nrmltxt"><?php echo $this->escape($this->publicinfo['city']);?></span></label>
+  <label><span>Frequency</span><span class="nrmltxt"><?php echo $this->escape($this->publicinfo['frequency']);?></span></label>
+      
+      
+      
+    </td>
+    </tr>
+</table>
+
+    
+     
+    
+   
+
+    </form>
+    <form action="" id="form" name="form" method="post">
+    <h2><img src="<?php echo $this->baseUrl().'/images/down-arrow.gif'?>">Event Details </h2>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top" width="123px">&nbsp;</td>
+    <td valign="top" ><label><span>Event Format </span> <span class="nrmltxt"><?php echo nl2br($this->escape($this->publicinfo['format']));?></span></label>
+   
+    <label><span>Number of attendees</span><span class="nrmltxt"><?php echo $this->escape($this->publicinfo['event_attendee']);?></span></label>
+    <label><span>Industries</span><span class="nrmltxt"><?php echo nl2br($this->escape($this->publicinfo['indusries']));?></span></label>
+    
+
+<label><span>Audience Profile</span><span class="nrmltxt"><?php echo nl2br($this->escape($this->publicinfo['event_audience_profile']));?></span></label>
+    
+    <label><span>  <cite>Audience Type</cite>   </span><span><?php echo $this->escape($this->publicinfo['event_audience_type']);?></span></label>
+    
+     <label><span>  <cite> Titles</cite>  </span> <span><?php echo $this->escape($this->publicinfo['event_audience_title']);?></span></label>
+     
+   
+  
+    
+       </td>
+    <td valign="top" width="432px">
+    <label><span>Company Size </span> <span class="nrmltxt"><?php echo $this->escape($this->publicinfo['event_company_size']);?></span></label>
+    
+    <label><span>Journalist / Analyst Attendees </span><span class="nrmltxt"><?php echo $this->escape($this->publicinfo['event_analyst_attendees_number']);?></span> </label>
+    <label><span>Journalist / Analyst Profile </span>  <span class="nrmltxt"><?php echo nl2br($this->escape($this->publicinfo['event_analyst_profile']));?></span></label>
+    <label><span>Must Client Sponsor To Speak</span> <span class="nrmltxt"><?php echo $this->escape($this->publicinfo['event_sponsor_to_speak']);?></span></label>
+<label><span>Call For Paper Open</span> <span class="nrmltxt"><?php echo $date->datestyle($this->publicinfo['event_paper_open_date']);?></span></label>
+<label><span>Call For Papers Deadline</span> <span class="nrmltxt"><?php echo $date->datestyle($this->publicinfo['event_paper_deadline_date']);?></span></label>
+<label><span>Days Remaining </span> <span class="nrmltxt"><?php echo $this->publicinfo['days_remaining'];?> </span></label> 
+    </td>
+  </tr>
+</table>
+
+    </form>
+     <form action="" id="form" name="form" method="post">
+    <h2><img src="<?php echo $this->baseUrl().'/images/down-arrow.gif'?>">Event Sponsorship </h2>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top" width="123px">&nbsp;</td>
+    <td valign="top" >
+    <label><span>Projected Total Sponsors</span><span class="nrmltxt"><?php echo $this->publicinfo['event_prj_total_sponsors'];?></span> </label>
+    <label><span>Sponsorship Levels & Costs</span> <span class="nrmltxt"><?php echo nl2br($this->escape($this->publicinfo['event_sponsorship_cost']));?></span></label>
+    
+       </td>
+    <td valign="top" width="432px">
+      <label> <span>Top Sponsors</span>  <span class="nrmltxt"><?php echo nl2br($this->escape($this->publicinfo['event_sponsor']));?></span></label>
+      
+      
+    </td>
+    </tr>
+</table>
+
+    </form>
+    <form action="" id="form" name="form" method="post">
+    <h2><img src="<?php echo $this->baseUrl().'/images/down-arrow.gif'?>">Event Content </h2>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top" width="123px">&nbsp;</td>
+    <td valign="top" >
+    <label><span>Tracks and Sessions</span><span class="nrmltxt"><?php echo nl2br($this->escape($this->publicinfo['event_tracks_sessions']));?></span>  </label>
+    <label><span>Keynote speakers  </span><span class="nrmltxt"><?php echo nl2br($this->escape($this->publicinfo['event_keynote_speakers']));?></span></label>
+   
+    
+       </td>
+    <td valign="top" width="432px">
+      <label> <span>Other Speakers </span>  <span class="nrmltxt"><?php echo nl2br($this->escape($this->publicinfo['event_other_speakers']));?></span></label>
+      
+      
+    </td>
+    </tr>
+</table>
+
+    </form>
+   <?php
+   // check if company id exist
+   if($session->comp_id){
+   ?> 
+ 
+  <h2><img src="<?php echo $this->baseUrl().'/images/down-arrow.gif'?>">Client Participation</h2>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top" width="123px">&nbsp;</td>
+      <td valign="top" >
+        <label><span>Employee Event Contact For Each Event</span></label>
+        
+        
+        <label><span><cite>Contact Name</cite>   </span><span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emip_emp_contact_name']);?></span></label>
+        <label><span><cite>Title</cite></span><span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emip_emp_title']);?></span></label>
+        <label>  <span><cite>Business Unit or Department</cite></span><span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emip_emp_buss_unit']);?></span> </label>
+        
+        <label>     <span><cite>Email Address</cite></span><span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emip_emp_email']);?></span></label>
+        <label>     <span><cite>Phone Number</cite></span><span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emip_emp_phone']);?></span></label>
+        <label><span>Event Type</span><span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emip_event_type']);?></span> </label>
+        <label><span>Event Tier</span><span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emip_event_tier']);?></span> </label>
+  
+  <label><span>Primary Event Objective</span><span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emip_primary_event_objective']);?></span></label>
+          <label><span>Campaign Alignment</span> <span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emip_campaign_alignment']);?></span> </label>
+ 
+        <label><span>Customer Target</span> <span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emip_customer_target']);?></span></label>
+ <label><span>Geographies</span> <span class="nrmltxt"><?php echo nl2br($this->escape($this->privateinfo['emp_geography']));?></span></label>
+  <label><span>Sector/Industries</span><span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emip_sector_industries']);?></span></label>
+  
+        </td>
+      <td valign="top" width="432px">
+        
+        <label><span>Proposed Participation Plan (costs) </span></label>
+        
+        <label> <span><cite>Sponsorship Level Cost</cite></span><span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emip_sponsorship_level_cost']);?></span> </label>
+        <label>   <span><cite>Booth Space</cite></span><span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emip_proposed_booth_space']);?></span></label>
+        <label><span><cite>Branding Opportunities</cite> </span><span class="nrmltxt"><?php echo nl2br($this->escape($this->privateinfo['emip_branding_opportunities']));?></span></label>
+        <label> <span><cite>Speaking Opportunities</cite></span> <span class="nrmltxt"><?php echo nl2br($this->escape($this->privateinfo['emip_speaking_opportunities']));?></span></label>
+        <label>     <span><cite>Client Speaker</cite></span><span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emip_client_speaker']);?></span> </label>
+        <label><span><cite>Key Message / theme for overall event</cite></span><span class="nrmltxt"><?php echo nl2br($this->escape($this->privateinfo['emip_key_message']));?></span></label>
+        <label><span><cite>Demo Plan</cite></span> <span class="nrmltxt"><?php echo nl2br($this->escape($this->privateinfo['emip_demo_plan']));?></span></label>
+        <label><span><cite>Partner Participation</cite></span> <span class="nrmltxt"><?php echo nl2br($this->escape($this->privateinfo['emip_partner_participation']));?></span></label>
+        
+        
+        
+        
+      </td>
+      </tr>
+  </table>
+  
+  <div class="txt-c"><br /></div>
+  
+      <h2><img src="<?php echo $this->baseUrl().'/images/down-arrow.gif'?>">Cost</h2>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top" width="123px">&nbsp;</td>
+          <td valign="top">
+            
+            
+  <label><span>Booth Space ($)</span><span class="nrmltxt"><?php echo $this->privateinfo['emip_booth_space'];?></span></label>
+  <label><span>Sponsorships ($)</span><span class="nrmltxt"><?php echo $this->privateinfo['emip_sponsorships'];?></span></label>
+  <label><span>Marketing Opportunities ($)</span><span class="nrmltxt"><?php echo $this->privateinfo['emip_marketing_opportunities'];?></span></label>
+  <label> <span>Venue Costs ($)</span><span class="nrmltxt"><?php echo $this->privateinfo['emip_venue_costs'];?></span></label>
+  <label><span>Production ($)</span><span class="nrmltxt"><?php echo $this->privateinfo['emip_production'];?></span></label>
+  <label><span>Housing / Transportation / Air ($)</span><span class="nrmltxt"><?php echo $this->privateinfo['emip_housing_transportation_air'];?></span></label>
+  <label>  <span>Food and Beverage ($)</span><span class="nrmltxt"><?php echo $this->privateinfo['emip_food_beverage'];?></span></label>
+  <label><span>External Speakers ($)</span><span class="nrmltxt"><?php echo $this->privateinfo['emip_external_speakers'];?></span></label>
+  <label><span>Experience Design Costs ($)</span><span class="nrmltxt"><?php echo $this->privateinfo['emip_experience_design_costs'];?></span></label>
+  <label> <span>Audience Generation Costs ($)</span><span class="nrmltxt"><?php echo $this->privateinfo['emip_audience_generation_costs'];?></span></label>
+  <label><span>Collateral Costs ($)</span><span class="nrmltxt"><?php echo $this->privateinfo['emip_collateral_costs'];?></span></label>
+   <label><span>Total Cost ($)</span><span class="nrmltxt"><?php echo $this->privateinfo['total_costs'];?></span></label> 
+            
+            
+            
+            </td>
+          <td valign="top" width="432px">
+            
+            
+            <label><span>KPI Section</span></label>
+  <label><span><cite>Number Of Leads</cite></span><span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emf_number_of_leads']);?></span></label>
+  <label><span><cite>Number Of Staff Needed For The Event</cite></span><span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emf_number_of_staff']);?></span></label>
+   <label><span><cite>Cost Per Lead</cite></span><span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emf_cost_per_lead']);?></span></label>
+    <label><span><cite>Cost Per Attendee</cite></span><span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emf_cost_per_attendee']);?></span></label>
+     <label><span><cite>Cost Per Event Staff</cite></span><span class="nrmltxt"><?php echo $this->escape($this->privateinfo['emf_cost_per_event_staff']);?></span></label>
+            
+            </td>
+          </tr>
+  </table>
+ <?php }?>
+
+<div class="txt-c"><br />
+
+
+</div>
+
+    
+    </div>
+    <br class="clear" />
+
+  </div>

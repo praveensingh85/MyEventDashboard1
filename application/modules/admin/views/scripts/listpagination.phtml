@@ -1,0 +1,101 @@
+<div class="pagination">
+<?php    
+    $m=$_GET;
+    $qry_str=l_qry_str($m);
+	
+	$sl = 'sl=n';
+	if(count($_POST) > 0 ||  $_GET['sl'] == 'y')
+	{
+		$sl = 'sl=y';
+	}
+	
+	$qry_str = '?'.$sl ; 
+	
+?>
+<div>
+        <!-- First page link -->
+        <?php if (isset($this->previous)): ?>
+              <a href="<?php echo  $this->url(array('page' => $this->first)).$qry_str; ?>">
+              	<img src="<?php echo $this->baseUrl() . '/images/s-previous-icon.jpg'?>" alt="Previous" />
+              </a>
+        <?php else: ?>
+                <span class="disabled">
+                	<img src="<?php echo $this->baseUrl() . '/images/previous-icon.jpg'?>" alt="Previous" />
+                </span>
+       <?php endif; ?>
+    	<!-- Previous page link -->
+       <?php if(isset($this->previous)): ?>
+              <a href="<?php echo  $this->url(array('page' => $this->previous)).$qry_str; ?>">
+              	<img src="<?php echo $this->baseUrl() . '/images/s-previous-icon-single.jpg'?>" />
+              </a>
+        <?php else: ?>
+            <span class="disabled">
+            	<img src="<?php echo $this->baseUrl() . '/images/previous-icon-single.jpg'?>" />
+            </span>
+        <?php endif; ?>
+        <!-- Numbered page links -->
+        <?php foreach ($this->pagesInRange as $page): ?>
+            <?php if ($page != $this->current): ?>
+                <a href="<?php echo  $this->url(array('page' => $page)).$qry_str; ?>"><?php echo  $page; ?></a>
+            <?php else: ?>
+                <span style="color:#591104;font-size:15px;"><b><?php echo $page; ?></b></span>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <!-- Next page link -->
+        <?php if (isset($this->next)): ?>
+               <a href="<?php echo  $this->url(array('page' => $this->next)).$qry_str; ?>"><img src="<?php echo $this->baseUrl() . '/images/next-icon-single.jpg'?>" /></a>
+        <?php else: ?>
+            <span class="disabled"><img src="<?php echo $this->baseUrl() . '/images/s-next-icon-single.jpg'?>" /></span>
+        <?php endif; ?>
+        <!-- Last page link -->
+        <?php if (isset($this->next)): ?>
+              <a href="<?php echo  $this->url(array('page' => $this->last)).$qry_str; ?>"><img src="<?php echo $this->baseUrl() . '/images/next-icon.jpg'?>" alt="Next" /></a>
+        <?php else: ?>
+            <span class="disabled"><img src="<?php echo $this->baseUrl() . '/images/s-next-icon.jpg'?>" alt="Next" /></span>
+        <?php endif; ?>
+        &nbsp; Page <?php echo  $this->current; ?> of <?php echo  $this->last; ?>
+    </div>
+ </div> 
+ 
+<?php
+function l_qry_str($arr, $skip = '')
+{
+	$s = "?";
+	$i = 0;
+	foreach($arr as $key => $value)
+	{
+		if($key != $skip) 
+		{
+			if (is_array($value)) 
+			{
+				foreach($value as $value2) 
+				{
+					if ($i == 0) 
+					{
+						$s .= $key . '[]=' . $value2;
+						$i = 1;
+					} 
+					else
+					{
+						$s .= '&' . $key . '[]=' . $value2;
+					}
+			}
+		}
+		else 
+		{
+			if ($i == 0) 
+			{
+				$s .= "$key=$value";
+				$i = 1;
+			}
+			else 
+			{
+				$s .= "&$key=$value";
+			}
+		}
+	  }
+	}
+	
+	return $s;
+}
+?>

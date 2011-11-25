@@ -1,0 +1,78 @@
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head> 
+<?php echo $this->headMeta() ?>
+<?php echo $this->headTitle() ?>
+<?php if ($this->dojo()->isEnabled()){
+   $this->dojo()->setLocalPath($this->BaseUrl().'/js/dojo/dojo/dojo.js')
+         ->addStyleSheetModule('dijit.themes.tundra');
+  echo $this->dojo();
+}?>
+
+<?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/master.css')?>
+
+</head>
+
+<body class="tundra">
+<div id="page"> 
+  <!-- header start -->
+  <?php echo $this->render('header.phtml') ?>
+  <!-- header end --> 
+  <div class="wraper">
+  <!-- sub-navigation on search page--> 
+  <?php
+   $session = new Zend_Session_Namespace('Med.auth');
+   $whattodo = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
+   $whattodo1 = Zend_Controller_Front::getInstance()->getRequest()->getModuleName().Zend_Controller_Front::getInstance()->getRequest()->     getControllerName().Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+    if($session->user_type !='super_user'  && $session->user_type !='super_admin' &&(($session->user_type =='client_admin' && $whattodo != 'admin') || $session->user_type=="user")   )
+	{
+		$controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+	$action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+	
+	$lClass = '' ;
+	$cClass = '' ;
+	if($controller == 'event')	
+	{
+		if($action == 'listviews')	
+			$lClass = 'color: #CC9012; font-size: 12px; font-weight: bold;' ;
+		if($action == 'cview')
+			$cClass = "color: #CC9012; font-size: 12px; font-weight: bold;" ;
+	}
+		?>
+  <div class="sub-nav">
+     <ul>
+            <li><a href="<?php echo $this->url(array( 'controller' => 'event', 'action' => 'cview')) ;?>"  style=" <?php echo $cClass;?>" id="calviewid"><?php echo $this->translate("Calendar View");?> </a></li>
+                <li>|</li>
+            <li><a href="<?php echo $this->url(array( 'controller' => 'event', 'action' => 'listviews')) ;?>"  style=" <?php echo $lClass;?>"><?php echo $this->translate("List View");?></a></li>
+        </ul>
+    </div>
+    <?php }?>
+    <!-- sub-navigation -->
+  <!-- two colunm start (content area) -->
+ <?php if($whattodo!= 'admin' && $whattodo1 !='defaulteventview')
+	{?>
+   <div class="left-container">
+	<?php echo $this->placeholder('sidebar-search') ?>
+	</div>
+   <?php }
+  
+   ?>
+   <?php if($whattodo!= 'admin' && $whattodo1 !='defaulteventview')
+	{?>
+    <div class="right-box"> 
+      <?php } echo $this->layout()->content; ?>
+     <?php if($whattodo != 'admin')
+	{?>
+    </div>
+    <?php }?>
+    <div class="clear"></div>
+  
+  <!-- two coulnm end(content area) --> 
+  
+  <!-- include footer  -->
+ <?php echo $this->render('footer.phtml') ?>
+  <!-- footer end --> 
+  </div>
+</div>
+</body>
+</html>

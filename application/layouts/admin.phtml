@@ -1,0 +1,20 @@
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head> 
+<?php echo $this->headMeta() ?>
+<?php echo $this->headTitle() ?>
+<?php if ($this->dojo()->isEnabled()){
+   $this->dojo()->setLocalPath($this->BaseUrl().'/js/dojo/dojo/dojo.js')
+         ->addStyleSheetModule('dijit.themes.tundra');
+  echo $this->dojo();
+}?>
+
+<?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/master.css')?>
+
+</head>
+
+<body class="tundra">
+
+
+</body>
+</html>

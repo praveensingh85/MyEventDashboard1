@@ -1,0 +1,78 @@
+<?php 
+ $this->placeholder('sidebar') ;
+?>
+<script type="text/javascript" src="<?php echo $this->baseUrl()?>/js/jquery.fancybox-1.3.4/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl()?>/js/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl()?>/js/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+<script type="text/javascript">
+		$(document).ready(function() {
+			$("#fancyfacebook").fancybox({
+				'width'				: '75%',
+				'height'			: '75%',
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+			$("#fancytwitter").fancybox({
+				'width'				: '75%',
+				'height'			: '75%',
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+			$("#fancygoogle").fancybox({
+				'width'				: '75%',
+				'height'			: '75%',
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+
+			$("#fancyopenid").fancybox({
+				'width'				: '75%',
+				'height'			: '75%',
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+
+
+		});
+</script>
+<?php
+// for over write the keywords
+echo $this->headMeta()->setName('description', 'OSH'); 
+// for over write the keywords
+echo $this->headMeta()->setName('keywords', 'framework, PHP, productivity');?>
+   <div class="outerbox"><div class="innerbox">
+     <div class="innerbox-top"><?php echo $this->translate('New User Sign Up');?></div>
+     <div class="innerbox-bg">
+	 <span class="mendatroy-fld">* <?php echo $this->translate('Mandatory Fields');?></span>
+	 <?php if($this->messages) : ?>
+	 <div>
+	 <ul class="errors"><li><?php echo $this->translate($this->messages); ?></li></ul>
+	 </div>
+	 <?php endif; ?>
+     <div class="signupfrm">
+	 <?php echo $this->form; ?>
+	 </div>
+     <div class="social-ntwk-singup"><div class="social-ntwk-top"><div class="or-txt"><?php echo $this->translate('OR');?></div><div class="social-ntwk-top-l"></div><div class="social-ntwk-top-b"><?php echo $this->translate('Sign Up using your account with');?></div><div class="social-ntwk-top-r"></div>
+     <div class="cl"></div></div>
+     <div class="social-icon-fram-l"></div>
+     <div class="social-icon-fram-b"><ul>
+     <li><a id="fancyfacebook" href="content/terms-agree?val=default/user/newfacebooksignup"><img src="<?php echo $this->baseUrl() . '/images/fb-img.png'?>" alt="Facebook" title="Facebook" /></a></li>
+     <li><a id="fancytwitter" href="content/terms-agree?val=default/user/newtwitterlogin"><img src="<?php echo $this->baseUrl() . '/images/twitter-img.png'?>" alt="Twitter" title="Twitter" /></a></li>
+     <li><a  id="fancygoogle" href="content/terms-agree?val=default/user/newgooglelogin"><img src="<?php echo $this->baseUrl() . '/images/google-img.png'?>"  alt="Google"  title="Google"/></a></li>
+     <li class="bdrno"><a id="fancyopenid" href="content/terms-agree?val=default/user/openid">
+  <img src="<?php echo $this->baseUrl() . '/images/openid-img.png'?>" alt="Open ID" title="Open ID" /></a></li>
+    </ul></div>
+     <div class="social-icon-fram-r"></div>
+     <div class="cl"></div>
+     </div>
+     </div>
+     <div class="innerbox-botm"></div>
+     </div></div>

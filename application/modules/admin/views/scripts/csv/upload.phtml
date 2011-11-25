@@ -1,0 +1,117 @@
+<script language="javascript">
+function calmsg(){
+   document.getElementById("searchform").style.display ="none";
+   document.getElementById("msgid").removeAttribute("style");
+}
+</script>
+<div class="fl"> <h1><?php echo $this->escape($this->publicinfo['event_name']);?></h1> </div>  
+<br class="clear" />
+<div class="add-event-box" id="list-form">
+<h2><img src="<?php echo $this->baseUrl().'/images/down-arrow.gif'?>">Bulk Events Insertion</h2>
+<div id="searchform" >
+<?php
+if($this->messagerec!=''){
+  echo "<h4>$this->messagerec</h4>";
+} 
+if(count($this->arr_error)>0){
+	   echo "<h5>Some rows have issues, so not inserted:</h5>";
+	   echo '<div class="issues" ><ul>';
+	   foreach($this->arr_error as $key=>$val){
+	        
+			foreach($val as $value){
+			  echo "<li>Row No $key : $value </li>";
+			}
+	   }
+	   echo "</ul></div>";
+
+	}
+if(count($this->arr_new_indus)>0){
+echo "<h5>Following new industries are inserted in system: </h5>";
+    echo '<div class="issues" ><ul>';
+    foreach($this->arr_new_indus as $val){
+	    foreach($val as $key_k => $val_v){
+		 echo "<li>Row No $key_k :  $val_v </li>";
+		}
+	}
+	 echo "</ul></div>";
+}
+
+if(count($this->arr_new_spons)>0){
+echo "<h5>Following new sponsors are inserted in system: </h5>";
+   echo '<div class="issues" ><ul>';
+    foreach($this->arr_new_spons as $val){
+	    foreach($val as $key_k => $val_v){
+		echo "<li>Row No $key_k :  $val_v </li>";
+		}
+	}
+   echo "</ul></div>";
+}
+if(is_array($this->arr_new_popu['EVENT_FORMAT'])){
+ echo "<h5>Following new EVENT FORMAT are inserted in system: </h5>";
+ echo '<div class="issues" ><ul>';
+    foreach($this->arr_new_popu['EVENT_FORMAT'] as $val){
+	    foreach($val as $key_k => $val_v){
+		echo "<li>Row No $key_k :  $val_v </li>";
+		}
+	}
+  echo "</ul></div>";
+}
+if(is_array($this->arr_new_popu['COMPANY_SIZE'])){
+ echo "<h5>Following new COMPANY SIZE are inserted in system: </h5>";
+  echo '<div class="issues" ><ul>';
+    foreach($this->arr_new_popu['COMPANY_SIZE'] as $val){
+	    foreach($val as $key_k => $val_v){
+		echo "<li>Row No $key_k :  $val_v </li>";
+		}
+	}
+  echo "</ul></div>";
+}
+if(is_array($this->arr_new_popu['EVENT_REGION'])){
+echo "<h5>Following new EVENT REGION are inserted in system: </h5>";
+echo '<div class="issues" ><ul>';
+    foreach($this->arr_new_popu['EVENT_REGION'] as $val){
+	    foreach($val as $key_k => $val_v){
+		echo "<li> Row $key_k :  $val_v </li>";
+		}
+	}
+  echo "</ul></div>";
+}
+if(is_array($this->arr_new_popu['EVENT_FREQUENCY'])){
+ echo "<h5>Following new EVENT FREQUENCY are inserted in system: </h5>";
+ echo '<div class="issues" ><ul>';
+    foreach($this->arr_new_popu['EVENT_FREQUENCY'] as $val){
+	    foreach($val as $key_k => $val_v){
+		echo "<li> Row $key_k :  $val_v </li>";
+		}
+	}
+	 echo "</ul></div>";
+}
+if(is_array($this->arr_new_popu['AUDIENCE_TYPE'])){
+ echo "<h5>Following new AUDIENCE TYPE are inserted in system: </h5>";
+ echo '<div class="issues" ><ul>';
+    foreach($this->arr_new_popu['AUDIENCE_TYPE'] as $val){
+	    foreach($val as $key_k => $val_v){
+		echo "<li> Row $key_k :  $val_v </li>";
+		}
+	}
+	echo "</ul></div>";
+}
+if(is_array($this->arr_new_popu['AUDIENCE_TITLE'])){
+  echo "<h5>Following new AUDIENCE TITLE are inserted in system: </h5>";
+   echo '<div class="issues" ><ul>';
+    foreach($this->arr_new_popu['AUDIENCE_TITLE'] as $val){
+	    foreach($val as $key_k => $val_v){
+		echo "<li> Row $key_k :  $val_v </li>";
+		}
+	}
+  echo "</ul></div>";
+}
+?>
+<?php echo $this->form;?></div>
+<div id="msgid" style="display:none;">
+Wait, it is progressing! <br/>
+<img src="<?php echo $this->baseUrl() ."/images/Loading2.gif"?>">
+</div>
+</div>
+</div>
+<br class="clear" />

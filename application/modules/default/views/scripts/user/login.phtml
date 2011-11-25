@@ -1,0 +1,47 @@
+<?php 
+ $this->placeholder('sidebar');
+?>
+<?php
+// for over write the keywords
+echo $this->headMeta()->setName('description', 'OSH'); 
+// for over write the keywords
+echo $this->headMeta()->setName('keywords', 'framework, PHP, productivity');?>
+   <div class="outerbox"><div class="innerbox">
+     <div class="innerbox-top"><?php echo $this->translate("Login with your OSH account");?></div>
+     <div class="innerbox-bg">
+	 <span class="mendatroy-fld">* <?php echo $this->translate('Mandatory Fields');?></span><br class="cl"/>
+
+     
+	 <div  class="form-detail">
+	 <?php if($this->message) : ?>
+	 <div>
+	 <ul class="errors"><li><?php echo $this->translate($this->message); ?></li></ul>
+	 </div>
+     <div>
+	 <ul class="errors"><li><?php echo $this->translate(implode("&nbsp;", $this->messages)); ?></li></ul>
+	 </div>
+	 <?php endif; ?><?php echo $this->form; ?>
+     <div class="forgetpassword"><a href="<?php echo $this->baseUrl() . '/default/user/forgotpassword'?>" title="Forgot Password"><?php echo $this->translate('Forgot Password');?></a></div>
+     </div>
+	 <div class="newto-osh"><p><?php echo $this->translate('New to OSH?');?><br />
+
+    
+<?php echo $this->translate("It's free and easy!");?></p>
+<p><a href="/signup"><img src="<?php echo $this->baseUrl() . '/images/signup-button.png'?>"  alt="Sign Up Now" title="Sign Up Now" /></a></p>
+</div>
+<div class="cl"></div>
+     <div class="social-ntwk-singup"><div class="social-ntwk-top"><div class="or-txt">OR</div><div class="social-ntwk-top-l"></div><div class="social-ntwk-top-b"><?php echo $this->translate('Login using your account with');?></div><div class="social-ntwk-top-r"></div>
+     <div class="cl"></div></div>
+     <div class="social-icon-fram-l"></div>
+     <div class="social-icon-fram-b"><ul>
+     <li><a href="/default/user/newfacebookloginoauth"><img src="<?php echo $this->baseUrl() . '/images/fb-img.png'?>" alt="Facebook" title="Facebook" /></a></li>
+     <li><a href="/default/user/newtwitterloginoauth"><img src="<?php echo $this->baseUrl() . '/images/twitter-img.png'?>" alt="Twitter" title="Twitter" /></a></li>
+     <li><a href="/default/user/newgoogleloginoauth"><img src="<?php echo $this->baseUrl() . '/images/google-img.png'?>"  alt="Google"  title="Google"/></a></li>
+     <li class="bdrno"><a href="/default/user/openidlogin"><img src="<?php echo $this->baseUrl() . '/images/openid-img.png'?>" alt="Open ID" title="Open ID" /></a></li>
+    </ul></div>
+     <div class="social-icon-fram-r"></div>
+     <div class="cl"></div>
+     </div>
+     </div>
+     <div class="innerbox-botm"></div>
+     </div></div>

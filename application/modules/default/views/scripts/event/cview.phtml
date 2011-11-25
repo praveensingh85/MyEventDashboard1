@@ -1,0 +1,83 @@
+<?php  $css = $this->baseUrl()."/css/fullcalendar/" ;?>
+<?php  $js  = $this->baseUrl()."/js/" ;?>
+
+<?php  $rows  = $this->cviewdata ; ?>
+
+<link rel='stylesheet' type='text/css' href='<?php echo $css ;?>fullcalendar.css' />
+<link rel='stylesheet' type='text/css' href='<?php echo $css ;?>fullcalendar.print.css' media='print'/>
+<script type='text/javascript' src='<?php echo $js ;?>jquery-1.5.2.min.js'></script>
+<script type='text/javascript' src='<?php echo $js ;?>jquery-ui-1.8.11.custom.min.js'></script>
+<script type='text/javascript' src='<?php echo $js ;?>fullcalendar/fullcalendar.min.js'></script>
+<script type='text/javascript'>
+
+$(document).ready(function() 
+{
+	var date = new Date();
+	var d = date.getDate();
+	var m = date.getMonth();
+	var y = date.getFullYear();
+	
+	var loadingimg = '';
+	
+	var keywords 			= $.trim($("#keywords").val());
+	var eventname 			= $.trim($("#eventname").val());
+	var datepicker 			= $.trim($("#datepicker").val());
+	var datepicker2 		= $.trim($("#datepicker2").val());
+	var primary_objective 	= $.trim($("#primary_objective").val());
+	var campaign_alignment 	= $.trim($("#campaign_alignment").val());
+	var customer_target 	= $.trim($("#customer_target").val());
+	var industry_sectors 	= $.trim($("#industry_sectors").val());
+	var geography 			= $.trim($("#geography").val());
+	var event_type 			= $.trim($("#event_type").val());
+	var EventStatus 		= $.trim($("#EventStatus").val());
+	
+	var WEBSITE = '<?php echo $this->baseUrl() ; ?>' ;
+	$.post(WEBSITE+"/event/cviewprocess/", 
+	{
+		keywords			: keywords,
+		eventname			: eventname,
+		datepicker			: datepicker,
+		datepicker2			: datepicker2,
+		primary_objective	: primary_objective,
+		campaign_alignment	: campaign_alignment,
+		customer_target		: customer_target,
+		industry_sectors	: industry_sectors,
+		geography			: geography,
+		event_type			: event_type,
+		EventStatus			: EventStatus
+	},
+	function(data) 
+	{
+		//var total = data.length ;
+		//alert(" total " + total);
+		$('#calendar').html('');
+		$('#calendar').fullCalendar(
+		{
+			header: 
+			{
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,basicWeek,basicDay'
+			},
+			
+			editable: false,
+			events: data  //data is json format it is come from php script
+		}); 		
+		
+	},"json");
+		
+});
+
+</script>
+<style type='text/css'>
+	
+	#calendar
+	{
+		margin: 15px 0px 0 0;
+		width: 720px;
+	}
+</style>
+
+<div id='calendar' align="center">
+<img src="<?php echo $this->baseUrl() ; ?>/images/loading.gif"/>
+</div>

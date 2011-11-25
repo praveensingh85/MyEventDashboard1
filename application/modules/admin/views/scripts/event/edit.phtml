@@ -1,0 +1,121 @@
+<script type="text/javascript" src="<?php echo $this->baseUrl()?>/js/prototype.js"></script>
+<script language="javascript">
+var curr_drop_down, new_value;
+var state_value="";
+var ptagid;
+function add_industry(dropdown,new_field,value)
+{	
+       if( value == undefined) { return false;}
+	   if( value == "") { return false;}
+	   curr_drop_down = dropdown;
+	   new_value = value;
+	   ptagid = "p"+new_field;
+	   document.getElementById(new_field).value   = "";
+	   document.getElementById(ptagid).innerHTML = document.getElementById(ptagid).innerHTML.replace(" Added!","");
+	   document.getElementById(ptagid).innerHTML = document.getElementById(ptagid).innerHTML.replace(" Already exists!","");
+	   document.getElementById(ptagid).innerHTML += "<span class=\"redtxt\"> Wait, progressing..</span>";
+	   new Ajax.Request(
+        "<?php echo $this->baseUrl()?>/admin/event/addindustry",
+            {
+                method:'get',
+                parameters: { value: value },
+                onSuccess: add_option_result
+        }
+		)
+}
+function add_sponsor(dropdown,new_field,value)
+{	
+       if( value == undefined) { return false;}
+	   if( value == "") { return false;}
+	   curr_drop_down = dropdown;
+	   new_value = value;
+	   ptagid = "p"+new_field;
+	   document.getElementById(new_field).value   = "";
+	   document.getElementById(ptagid).innerHTML = document.getElementById(ptagid).innerHTML.replace(" Added!","");
+	   document.getElementById(ptagid).innerHTML = document.getElementById(ptagid).innerHTML.replace(" Already exists!","");
+	   document.getElementById(ptagid).innerHTML += "<span class=\"redtxt\"> Wait, progressing..</span>";
+	   new Ajax.Request(
+        "<?php echo $this->baseUrl()?>/admin/event/addsponsor",
+            {
+                method:'get',
+                parameters: { value: value },
+                onSuccess: add_option_result
+        }
+		)
+}
+
+function add_option(dropdown,new_field,db_field,value)
+{	
+	   if( value == undefined) { return false;}
+	   if( value == "") { return false;}
+	   curr_drop_down = dropdown;
+	   new_value = value;
+	   ptagid = "p"+new_field;
+	   document.getElementById(new_field).value   = "";
+	   document.getElementById(ptagid).innerHTML = document.getElementById(ptagid).innerHTML.replace(" Added!","");
+	   document.getElementById(ptagid).innerHTML = document.getElementById(ptagid).innerHTML.replace(" Already exists!","");
+	   document.getElementById(ptagid).innerHTML += "<span class=\"redtxt\"> Wait, progressing..</span>";
+	   new Ajax.Request(
+        "<?php echo $this->baseUrl()?>/admin/event/addoptions",
+            {
+                method:'get',
+                parameters: {value: value, type: db_field },
+                onSuccess: add_option_result
+        }
+		)
+}
+function add_option_result(resp)
+{  
+   <?php 
+      // Means data is added in db successfully, let us add it in dropdown 
+   ?>	
+    if(resp.responseText == "ERROR"){
+	   document.getElementById(ptagid).innerHTML = document.getElementById(ptagid).innerHTML.replace(" Wait, progressing.."," Already exists!"); 
+	   return;
+	}
+    var optn = document.createElement("OPTION");
+    optn.text =  new_value;
+    optn.value = resp.responseText;
+    optn.selected= true;
+    document.getElementById(curr_drop_down).options.add(optn); 
+    document.getElementById(ptagid).innerHTML = document.getElementById(ptagid).innerHTML.replace(" Wait, progressing.."," Added!");
+ 
+} 
+
+function AutoFillStates(value)
+{
+	   if( value=='' || value == undefined) { return false; }
+	   document.getElementById("pevent_state_id").innerHTML += "<span class=\"redtxt\"> Wait, Loading..</span>";
+	   new Ajax.Request(
+        "<?php echo $this->baseUrl()?>/admin/event/getdatastates",
+            {
+                method:'get',
+                parameters: {id: value},
+                onSuccess: FillStates
+        }
+		)
+
+}
+function FillStates(rsp)
+{  
+	var i=0;
+	var selectd=false;
+	var pf = eval('(' + rsp.responseText + ')');
+	document.getElementById("event_state_id").options.length = 0;
+	document.getElementById("event_state_id").options[0]=new Option('Select..','', false, false);
+	document.getElementById("pevent_state_id").innerHTML = document.getElementById("pevent_state_id").innerHTML.replace(" Wait, Loading..","");
+	for(i=0;i<pf.items.length;i++)
+    { 
+		  if(pf.items[i].st_id == state_value){ selectd=true;}
+		  document.getElementById("event_state_id").options[i+1]=new Option(pf.items[i].st_name, pf.items[i].st_id,false,selectd);
+		  selectd= false;
+	}
+	document.getElementById("event_state_id").disabled=false;
+  } 
+
+
+</script>
+<h1>Edit Event</h1><br class="clear" /><?php if($_GET['msg']=="new"):?><div class="infomsg">Event is added successfully, now you can add one more new event!</div><?php endif; ?>
+<div  class="add-event-box" id="list-form">
+<?php echo $this->form;?>
+</div>

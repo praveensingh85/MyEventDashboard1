@@ -1,0 +1,33 @@
+<style type="text/css">
+.outerboxmain{ width:915px; border:1px solid #dadada; background:#fafafc;}
+.heading{font-size:24px; color:#00457c; font-family:Arial, Helvetica, sans-serif; padding:10px 0 0 15px;}
+.outerboxmain p{font-size:12px; color:#010101; margin:0; padding:10px 0 0 15px; font-family:Arial, Helvetica, sans-serif; line-height:18px;}
+.global-button{ background:url(../images/orange-button.png) no-repeat left top; width:117px; height:25px; font-size:13px; color:#000; text-align:center; border:none; margin:10px 0 10px 15px; padding:0; cursor:pointer; font-family:Arial, Helvetica, sans-serif; line-height:25px;}
+a{ color:#000; text-decoration:none;}
+a:hover{ color:#666666; text-decoration:none;}
+</style>
+
+<div class="outerbox"><div class="innerbox">
+<div class="innerbox-top"><?php echo $this->translate("Terms And Agree");?></div>
+<div class="innerbox-bg">
+  <table width="100%" border="0" >
+    <tr>
+      <td colspan="2"><p><?php echo $this->translate("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")?></p>
+      <p><?php echo $this->translate("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")?></p>
+      <p><?php echo $this->translate("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.")?></p></td>
+    </tr>
+  <?php if($this->success_url!=""){ ?>
+    <tr>
+      <td width="10%"><div class="global-button"><a href="<?php echo $this->baseUrl().'/'.$this->success_url;?>" target="_parent"><?php echo $this->translate("Accept")?></a></div></td>
+      <td width="90%"><div class="global-button"><a  href="#" onClick="parent.jQuery.fancybox.close();"><?php echo $this->translate("Decline")?></a></div></td>
+    </tr>
+    <?php } ?>
+  </table>
+  </div>
+  <div class="innerbox-botm"></div>
+  <div  class="form-detail">
+    
+  </div>
+</div>
+</div>
+

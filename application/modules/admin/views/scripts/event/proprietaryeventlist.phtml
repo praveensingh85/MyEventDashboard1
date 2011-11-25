@@ -1,0 +1,270 @@
+ <link rel="stylesheet" type="text/css"  href="<?php echo $this->baseUrl() ;?>/css/calendar-win2k-cold-1.css" />
+
+	<script type='text/javascript' src='<?php echo $this->baseUrl() ;?>/js/calendar.js'></script>
+ 	 <script type="text/javascript" src="<?php echo $this->baseUrl() ;?>/js/lang/calendar-en.js"></script>
+    <script type='text/javascript' src='<?php echo $this->baseUrl() ;?>/js/calendar-setup.js'></script>
+ <script language="javascript">
+ function checkallboxes(objForm){
+ len = objForm.elements.length;
+ var i=0;
+ for( i=0 ; i<len ; i++) {
+  if (objForm.elements[i].type=='checkbox') {
+	  
+   objForm.elements[i].checked=objForm.check_all.checked;
+  }
+ }
+}
+
+function statusval(val)
+{
+	
+	document.publish.status.value = val;
+	document.publish.submit();
+	}
+	
+function checkdate(){
+var validformat=/^(\d{4})-(\d{1,2})-(\d{1,2})$/ //Basic check for format validity
+var returnval=false
+if(document.search1.datepicker.value !="From")
+{
+if (!validformat.test(document.search1.datepicker.value))
+alert("Invalid Date Format. Please correct and submit again.")
+else{ //Detailed check for valid date ranges
+var monthfield=document.search1.datepicker.value.split("-")[1]
+var dayfield=document.search1.datepicker.value.split("-")[2]
+var yearfield=document.search1.datepicker.value.split("-")[0]
+var dayobj = new Date(yearfield, monthfield-1, dayfield)
+if ((dayobj.getMonth()+1!=monthfield)||(dayobj.getDate()!=dayfield)||(dayobj.getFullYear()!=yearfield))
+alert("Invalid Day, Month, or Year range detected. Please correct and submit again.")
+else
+returnval=true
+}
+if (returnval==false) document.search1.datepicker.select()
+return returnval
+}
+
+if(document.search1.datepicker2.value !="To")
+{
+if (!validformat.test(document.search1.datepicker2.value))
+alert("Invalid Date Format. Please correct and submit again.")
+else{ //Detailed check for valid date ranges
+var monthfield=document.search1.datepicker2.value.split("-")[1]
+var dayfield=document.search1.datepicker2.value.split("-")[2]
+var yearfield=document.search1.datepicker2.value.split("-")[0]
+var dayobj = new Date(yearfield, monthfield-1, dayfield)
+if ((dayobj.getMonth()+1!=monthfield)||(dayobj.getDate()!=dayfield)||(dayobj.getFullYear()!=yearfield))
+alert("Invalid Day, Month, or Year range detected. Please correct and submit again.")
+else
+returnval=true
+}
+if (returnval==false) document.search1.datepicker2.select()
+return returnval
+}
+}	
+</script>
+<?php
+ $registry = Zend_Registry::getInstance();
+ $admin = $registry['Med_Admin'];
+ $session = new Zend_Session_Namespace('Med.auth');
+ $company_id = $session->comp_id;
+ if($company_id)
+ {
+	$event_title = "Event Management - Internal"; 
+	 }
+  else
+  {
+	 $event_title = "Event Management";  
+	  }	
+	$find =  new Med_Plugin_Find(); 
+	 // find all country
+  $country = Doctrine_Query::create()
+  ->from('Med_Model_Countries c');
+  $country->orderBy('c.country_name ASC');
+  $countrylist = $country->fetchArray();
+   $getValue = $_SESSION['getValue']; 
+  if($_POST['filter']=="Go" || $_GET['sl']=="y")
+  {
+	  $name = $getValue['event_name'];
+	  $countryselect = $getValue['country'];
+	  $status = $getValue['status'];
+	  $fromdate = $getValue['datepicker'];
+	  $todate = $getValue['datepicker2'];
+	  }
+   else
+   {
+	  $name = "Event Name";
+	  $fromdate = "From";
+	  $todate = "To"; 
+	   }	 
+ ?>	  
+
+  <div class="fl"> <h1 ><?php echo $this->translate($event_title);?></h1><!--<div class="global-client"> <?php if($admin!="client_admin"){?><form  name="user" action="<?php echo $this->baseUrl().'/admin/event/globaleventlist'?>" method="post">Select Client: <select name="client" class="slect-client"><?php echo $this->option;?></select><input name="clientgo" type="submit"  class="optional-button" value="Go"/></form><?php }?></div>--></div>
+ <div class="top-icons"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><a href="<?php echo $this->url(array('controller'=>'event','module'=>'admin','action'=>'add','prop'=>'yes'))?>"><img src="<?php echo $this->baseUrl() . '/images/add-event-icon.png'?>"  alt="Add Event" title="Add Event" /></a><br />
+<?php echo $this->translate("Add Event");?></td>
+    <td><a href="#" onclick="statusval('Publish')"><img src="<?php echo $this->baseUrl() . '/images/published-icon.png'?>"  /></a><br />
+<?php echo $this->translate("Publish");?></td>
+    <td><a href="#" onclick="statusval('Unpublish')"><img src="<?php echo $this->baseUrl() . '/images/unpublished-icon.png'?>"  /></a><br />
+<?php echo $this->translate("Unpublish");?></td>
+
+<td><a href="#" onclick="statusval('Considering')"><img src="<?php echo $this->baseUrl() . '/images/considering-icon.png'?>"  /></a><br />
+<?php echo $this->translate("Considering");?></td>
+   <td><a href="#" onclick="statusval('Contracted')"><img src="<?php echo $this->baseUrl() . '/images/contracted-icon.png'?>"  /></a><br />
+<?php echo $this->translate("Contracted");?></td>
+
+  </tr>
+ 
+</table>
+</div><br class="clear" />
+<div class="top-filters">
+<form name="search1" action="<?php echo $this->baseUrl().'/admin/event/proprietaryeventlist'?>" method="post" onsubmit=" return checkdate();">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr class="event-table-heading">
+          <td class="txt-l">
+<a href="<?php echo $this->baseUrl() . '/admin/event/globaleventlist'?>" class="optional-button"><strong>Switch to Global Events</strong></a></td><td class="txt-r">
+            <input name="event_name" type="text" id="ename" value="<?php echo $name;?>" class="filed-area" /> 
+            <select name="country" class="filed-area">
+               <option value="">Country</option>
+               <?php 
+			   foreach($countrylist as $r){?>
+				<option value="<?php echo $r['id'];?>" <?php if($countryselect ==  $r['id']){ echo "selected";}?>><?php echo $r['country_name'];?></option>   
+			   <?php }
+			   ?>
+            </select>
+            <select name="status" class="filed-area">
+               <option value="">Status</option>
+                <option value="Considering" <?php if($status == "Considering"){ echo "selected";}?>>Considering</option><option value="Contracted" <?php if($status == "Contracted"){ echo "selected";}?>>Contracted</option>
+                <option value="Publish" <?php if($status == "Publish"){ echo "selected";}?>>Publish</option><option value="Unpublish" <?php if($status == "Unpublish"){ echo "selected";}?>>Unpublish</option>
+              </select>
+            <input name="datepicker" id="datepicker" type="text" style="width:100px;" value="<?php echo $fromdate;?>"/>
+&nbsp;<img src="<?php echo $this->baseUrl().'/images/cal.gif'?>" id="f_trigger_a" />
+<input name="datepicker2" id="datepicker2" type="text" style="width:100px;" value="<?php echo $todate;?>"/>
+&nbsp;<img src="<?php echo $this->baseUrl().'/images/cal.gif'?>" id="f_trigger_b" />
+<script type="text/javascript">
+    Calendar.setup({
+        inputField     :    "datepicker",      // id of the input field
+        ifFormat       :    "%Y-%m-%d",       // format of the input field
+        button         :    "f_trigger_a",   // trigger for the calendar (button ID)
+    });
+</script>
+
+
+<script type="text/javascript">
+    Calendar.setup({
+        inputField     :    "datepicker2",      // id of the input field
+        ifFormat       :    "%Y-%m-%d",       // format of the input field
+        button         :    "f_trigger_b",   // trigger for the calendar (button ID)
+    });
+</script>
+            
+            <input name="filter" type="submit"  class="optional-button" value="Go"/></td>
+        </tr>
+        </table>
+        </form>
+        </div>
+	<?php if(is_array($this->message)){?><div class="infomsg"><?php echo implode(",",$this->message) ; $this->message='';?></div><?php } ?>
+    <div class="event-box">
+
+      <form name="publish" action="<?php echo $this->baseUrl().'/admin/event/publishglobalevent'?>" method="post">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr class="table-heading">
+          <td>
+             <input type="checkbox" name="check_all" value="Check All" onClick="checkallboxes(this.form);" alt="select" title="select">
+          </td>
+          <td><strong><?php echo $this->translate("Event Name");?> <!--<img src="<?php echo $this->baseUrl() . '/images/s_desc.png'?>" width="11" height="9" alt="down" />--></strong></td>
+          <td  class="txt-c"><strong><?php echo $this->translate("Status");?><!--<img src="<?php echo $this->baseUrl() . '/images/s_desc.png'?>" width="11" height="9" alt="down" />--></strong></td>
+          <td class="txt-c"><strong><?php echo $this->translate("Start Date");?><!--<img src="<?php echo $this->baseUrl() . '/images/s_desc.png'?>" width="11" height="9" alt="down" />--></strong></td>
+          <td class="txt-c"><strong><?php echo $this->translate("End Date");?><!--<img src="<?php echo $this->baseUrl() . '/images/s_desc.png'?>" width="11" height="9" alt="down" />--></strong></td>
+          <td class="txt-c"><strong><?php echo $this->translate("Country");?><!--<img src="<?php echo $this->baseUrl() . '/images/s_desc.png'?>" width="11" height="9" alt="down" />--></strong></td>
+          <td class="txt-c"><strong><?php echo $this->translate("Action");?></strong></td>
+        </tr>
+        
+        <?php 
+		$date = new Med_Viewhelper_Dateformatstyles ;
+		if(count($this->paginator)>0)
+		{
+		foreach ($this->paginator as $r):
+		 // condition for status images
+		 $img_name = "";
+		 if($company_id>0)
+		 {
+			$event_query = Doctrine_Query::create()
+                  ->from('Med_Model_EventsMoreInfoPrivate e')
+				  ->where('e.emip_event_id = ?',$r['event_id'])
+				  ->addwhere('e.emip_cmp_id = ?',$company_id);
+			$results_event = $event_query->fetchArray(); 
+			
+			if(count($results_event)>0)
+			{
+				 if($results_event['0']['emp_status']=="Considering")
+		 {
+			 $img_name ="considering-icon-small.png";
+			 }	
+		elseif($results_event['0']['emp_status']=="Contracted")
+		 {
+			 $img_name ="contracted-icon-small.png";
+			 }
+			 else
+			 {
+				 $img_name ="";
+				 }	  
+				}
+			 }
+		 
+		 if($img_name == "")
+		 {	 
+		 if($r['event_status']=="Publish")	
+		 {
+			 $img_name ="published-icon-small.png";
+			 }
+		if($r['event_status']=="Unpublish")
+		 {
+			 $img_name ="unpublished-icon-small.png";
+			 }	
+		 
+		 }   
+			   ?>
+        <tr>
+          <td><input name="checkbox[]" type="checkbox" id="checkbox[]" value="<?php echo $r['event_id']?>"></td>
+          <td width="450px"><?php echo $this->escape($r['event_name'])?></td>
+          <td align="center"><img src="<?php echo $this->baseUrl() . '/images/'.$img_name?>" width="16" height="18"  /></td>
+          <td class="txt-c"><?php echo $this->escape($date->datetimestyle($r['event_start_date']))?></td>
+          <td class="txt-c"><?php echo $this->escape($date->datetimestyle($r['event_end_date']))?></td>
+          <td class="txt-c"> <?php echo $this->escape($find->findcountry($r['event_country_id']))?></td>
+          <td class="txt-c" width="100px"><a href="<?php echo $this->url(array( 'controller' => 'event', 'action' => 'view', 'eventid' => $r['event_id'],'prop'=>'yes')); ?>"> <img  src="<?php echo $this->baseUrl() . '/images/preview-icon.png'?>" width="16" height="15" alt="Preview" title="Preview" /></a>&nbsp;<a href="<?php echo $this->url(array( 'controller' => 'event', 'action' => 'edit', 'event_id' => $r['event_id'],'prop'=>'yes')); ?>"><img src="<?php echo $this->baseUrl() . '/images/b_edit.png'?>" width="16" height="16" alt="Edit" title="Edit"/></a>&nbsp;<a href="<?php echo $this->url(array( 'controller' => 'event', 'action' => 'del', 'event_id' => $r['event_id'])); ?>" onClick="javascript:return confirm('Are you sure you want to delete this event?');"><img src="<?php echo $this->baseUrl() . '/images/delete-icon.png'?>" width="16" height="16" alt="Delete" title="Delete"/></a></td>
+        </tr>
+        <?php endforeach; ?>   
+        <input name="status" type="hidden"   value=""/>  
+          <?php if(!$company_id)
+{?>
+        <tr>
+          <td colspan="7">
+     
+          <input name="action1" type="button"  class="optional-button" value="Publish" onClick="statusval('Publish');"/><input name="action2"  type="button"  class="optional-button" value="Unpublish" onclick="statusval('Unpublish')"/>
+         
+          </td>
+        </tr> <?php }?>
+       <?php }
+	    else
+	   {?>
+       <tr>
+        <td colspan="7" align="center"><?php echo "There is no records.";?></td>
+       </tr>
+		   
+		 <?php  }?>
+        </table></form>
+        <div class="bottom-bg"><div class="fl">
+        <?php 
+		if(count($this->paginator)>0)
+		{
+	echo $this->paginationControl($this->paginator, 'Sliding',  'listpagination.phtml'); ?>
+   
+        <?php }?> 
+            </div>
+            <br class="clear" />
+
+            </div>
+    </div>
+    
+    <div class="clear"></div>

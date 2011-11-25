@@ -1,0 +1,104 @@
+<?php
+ $registry = Zend_Registry::getInstance();
+ $admin = $registry['Med_Admin'];
+ $session = new Zend_Session_Namespace('Med.auth');
+ $find = new Med_Plugin_Find();
+ $pflist = $find->findalldepartment('USER_DEPARTMENT');
+ // find post search value
+  $getValue = $_SESSION['getValue']; 
+  if($_POST['filter']=="Go" || $_GET['sl']=="y")
+  {
+	  $fname = $getValue['fname'];
+	  $lname = $getValue['lname'];
+	  $department = $getValue['department'];
+	  
+	  }
+   else
+   {
+	  $fname = "First Name";
+	  $lname = "Last Name";
+	 
+	   }	
+?>
+<div class="wraper"> 
+    
+   <div class="fl"> <h1>User Management </h1><div class="global-client"><?php if($admin!="client_admin"){?><form  name="user" action="<?php echo $this->baseUrl().'/admin/user/list'?>" method="post">Select Client: <select name="client" class="slect-client"><?php echo $this->option;?></select><input name="clientgo" type="submit"  class="optional-button" value="Go"/></form><?php }?></div></div>
+
+
+    <div class="top-icons"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><a href="<?php echo $this->baseUrl().'/admin/user/add'?>"><img src="<?php echo $this->baseUrl() . '/images/add-event-icon.png';?>"  alt="Add User" title="Add User" /></a><br />
+Add User</td>
+    
+ 
+  </tr>
+  
+</table></div>
+<br class="clear" />
+
+<div class="top-filters">
+      <form name="search1" action="<?php echo $this->baseUrl().'/admin/user/list'?>" method="post" >
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr class="event-table-heading">
+          <td class="txt-r">
+            <input name="fname" type="text" id="fname" value="<?php echo $fname;?>" class="filed-area" />
+            <input name="lname" type="text" id="lname" value="<?php echo $lname;?>" class="filed-area" />
+            <select name="department" class="filed-area">
+            <option value="">Department</option>
+            <?php foreach ($pflist as $rp){ ?>
+				<option value="<?php echo $rp['pf_id']; ?>" <?php if($department ==  $rp['pf_id']){ echo "selected";}?>><?php echo $rp['pf_name']; ?></option>
+			<?php }?>
+            </select>
+            <input name="filter" type="submit"  class="optional-button" value="Go"/></td>
+        </tr>
+        </table>
+        </form>
+        </div>
+        <?php if(is_array($this->message)){?><div class="infomsg"><?php echo implode(",",$this->message) ; $this->message='';?></div><?php } ?>
+    <div class="event-box">
+
+      
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr class="table-heading">
+          
+          <td><strong>First Name</strong></td>
+          <td  ><strong>Last Name </strong></td>
+          <td ><strong>Email ID </strong></td>
+          <td ><strong>Department</strong></td>
+          <td ><strong>Action</strong></td>
+        </tr>
+        <?php
+        if(count($this->paginator)>0)
+		{
+		
+		foreach ($this->paginator as $r):
+		$depart = $find->findpfname($r['cu_department'],'USER_DEPARTMENT');
+		?>
+        <tr>
+         
+          <td><?php echo $this->escape($r['cu_fname'])?></td>
+          <td > <?php echo $this->escape($r['cu_lname'])?></td>
+          <td ><?php echo $this->escape($r['cu_email'])?></td>
+          <td ><?php echo $this->escape($depart)?></td>
+           <td ><a href="<?php echo $this->baseUrl() . '/admin/user/edit?cu_id='.$r['cu_id']?>" ><img src="<?php echo $this->baseUrl() . '/images/b_edit.png'?>" width="16" height="16" alt="Edit" title="Edit" /></a>&nbsp;<a href="<?php echo $this->baseUrl() . '/admin/user/del?cu_id='.$r['cu_id']?>" onClick="javascript:return confirm('Are you sure you want to delete this user?');"> <img src="<?php echo $this->baseUrl() . '/images/delete-icon.png'?>" alt="Delete" title="Delete" /></a></td>
+        </tr>
+        <?php endforeach; }
+		else { ?>
+        <tr>
+        	<td colspan="5">There is no record!</td>
+            </tr>
+		<?php }?>    
+        </table>
+                <div class="bottom-bg"> <div class="fl">
+            <?php if(count($this->paginator)>0)
+		{
+	echo $this->paginationControl($this->paginator, 'Sliding',  'listpagination.phtml'); 
+	}?>
+            </div>
+      <br class="clear" /></div>
+    </div>
+    
+    <div class="clear"></div>
+   
+
+  </div>

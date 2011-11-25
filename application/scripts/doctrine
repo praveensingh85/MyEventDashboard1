@@ -1,0 +1,4 @@
+#!/usr/bin/env /cygdrive/c/xampp/php/php.exe
+<?php
+chdir(dirname(__FILE__));
+include('doctrine.php');

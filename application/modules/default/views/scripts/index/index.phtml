@@ -1,0 +1,49 @@
+<?php echo $this->doctype() ?> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<?php echo $this->headMeta() ?>
+<?php echo $this->headTitle() ?>
+
+<?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/login.css')?>
+</head>
+
+<body>
+<div id="page">
+<div class="bg-top"></div>
+<div class="container">
+<!--left container starts-->
+<div class="left-container">
+<!--logo starts-->
+<div id="logo"><img src="<?php echo $this->baseUrl() . '/images/event-marketing-partners-logo.jpg'?>"  alt="Event Marketing Partner" title="Event Marketing Partner" /></div>
+<!--logo ends-->
+<!--user login starts-->
+<div class="login-bg">
+<div class="login"><?php echo $this->translate("Login");?></div>
+<div class="clear"></div>
+
+<?php
+$session = new Zend_Session_Namespace('Med.auth');
+echo $session->login_error;	 
+ echo $this->form; 
+?> 
+
+ 
+</div>
+<!--user login ends-->
+</div>
+<!--left container ends-->
+
+<!--right container starts-->
+<div class="right-container">
+<div class="heading"><?php echo $this->translate("Event Marketing Strategy");?></div>
+<h4><?php echo $this->translate("Event Marketing Strategy starts with data. The data to understand which events you are participating in or hosting today; the data to analyze your event choices by industry, sector, or region; and the data to manage your event budgets. This event marketing data provides the opportunity to make informed decisions that move you closer to achieving your business and marketing goals.");?></h4>
+<h4><?php echo $this->translate("This database allows you to locate events where you will reach your target audience with compelling thought leadership and educational messages supporting your company's products and services. The tool promotes fact-based event decisions resulting in higher returns on investments and objectives, leading to the success of your event marketing program.");?></h4>
+<h4><strong><?php echo $this->translate('For additional information or to request a demo please contact us at <a href="mailto:info@eventmarketingpartners.com">info@eventmarketingpartners.com</a>');?></strong></h4>
+</div>
+
+<!--right container ends-->
+<div class="clear"></div>
+</div>
+<div class="bg-bottom"></div>
+</div>
+</html>

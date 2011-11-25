@@ -1,0 +1,63 @@
+<?php
+ $registry = Zend_Registry::getInstance();
+ $admin = $registry['Med_Admin'];
+ $session = new Zend_Session_Namespace('Med.auth');
+ 
+ ?>
+ <script language="javascript" type="text/javascript">
+ function sendglobal()
+ {
+	 
+	 window.location.href='admin/event/globaleventlist/G/yes';
+	 }
+ </script>
+  <div class="client-adminbox">
+  <div class="grey-box"> <div class="grey-box-top"></div>
+  <div class="grey-box-bg"><h5><img src="<?php echo $this->baseUrl() . '/images/event-icon.jpg'?>" alt="<?php echo $this->translate('Event Management')?>" /><?php echo $this->translate('Event Management')?></h5>
+<p> <?php echo $this->translate("Manage events including adding, editing, deleting, change status, etc. of your company's proprietary events and private event data related to a public event.")?></p>
+<?php if($admin!="client_admin"){?><p class="txt-c"><input name="" type="button" value="Manage Global Events" class="optional-button" onclick=" sendglobal();" />
+</p><?php }?>
+<div class="txt-c"><form  name="event" action="<?php echo $this->baseUrl().'/admin/event/globaleventlist'?>" method="post"><?php if($admin!="client_admin"){?><select name="client" class="slect-client"><option value="">Select Client</option><?php echo $this->option;?></select><input name="Event" type="submit" value="Manage" class="optional-button" /><?php } else{?><input type="hidden" name="client" value="<?php echo $session->comp_id;?>" /><input name="Event" type="submit" value="Manage" class="optional-button" /><?php }?></form></div>
+</div>
+<div class="grey-box-botm"></div>
+  </div>
+  <div class="grey-box">
+  <div class="grey-box-top"></div>
+  <div class="grey-box-bg">
+    <h5><img src="<?php echo $this->baseUrl() . '/images/user-icon.jpg'?>" alt="<?php echo $this->translate('User Management')?>" /><?php echo $this->translate('User Management')?></h5>
+<p>  <?php echo $this->translate("Manage your users' access: add, edit or delete users")?></p>
+<div class="txt-c"><form  name="user" action="<?php echo $this->baseUrl().'/admin/user/list'?>" method="post"><?php if($admin!="client_admin"){?><select name="client" class="slect-client"><option>Select Client</option><?php echo $this->option;?></select><input name="User" type="submit" value="Manage" class="optional-button" /><?php } else{?><input type="hidden" name="client" value="<?php echo $session->comp_id;?>" /><input name="User" type="submit" value="Manage" class="optional-button" /><?php }?></form></div>
+</div>
+<div class="grey-box-botm"></div>
+  </div>
+  <div class="grey-box">
+  <div class="grey-box-top"></div>
+  <div class="grey-box-bg">
+    <h5><img src="<?php echo $this->baseUrl() . '/images/group-icon.jpg'?>" alt="<?php echo $this->translate('Group Management')?>" /><?php echo $this->translate('Group Management')?></h5>
+<p> <?php echo $this->translate("Build and manage your company's groups and assign portfolios to groups")?></p>
+<div class="txt-c"><form  name="group" action="" method="post"><?php if($admin!="client_admin"){?><select name="client" class="slect-client"><option>Select Client</option><?php echo $this->option;?></select><input name="Group" type="submit" value="Manage" class="optional-button" /><?php } else{?><input type="hidden" name="client" value="<?php echo $session->comp_id;?>" /><input name="Group" type="submit" value="Manage" class="optional-button" /><?php }?></form></div>
+ </div>
+<div class="grey-box-botm"></div> </div>
+  <div class="grey-box">
+  <div class="grey-box-top"></div>
+  <div class="grey-box-bg">
+    <h5><img src="<?php echo $this->baseUrl() . '/images/portfolio-icon.jpg'?>" alt="<?php echo $this->translate('Portfolio Management');?>" /><?php echo $this->translate('Portfolio Management');?></h5>
+<p> <?php echo $this->translate("Build and save your company's event portfolios by campaigns, regions, business units, etc")?></p>
+<div class="txt-c"><form  name="portfolio" action="" method="post"><?php if($admin!="client_admin"){?><select name="client" class="slect-client"><option>Select Client</option><?php echo $this->option;?></select><input name="Portfolio" type="submit" value="Manage" class="optional-button" /><?php } else{?><input type="hidden" name="client" value="<?php echo $session->comp_id;?>" /><input name="Portfolio" type="submit" value="Manage" class="optional-button" /><?php }?></form></div>
+</div>
+<div class="grey-box-botm"></div>
+  </div>
+  <?php if($admin=="super_admin"){?>
+  <div class="grey-box">
+  <div class="grey-box-top"></div>
+  
+  <div class="grey-box-bg">
+    <h5><img src="<?php echo $this->baseUrl() . '/images/client-icon.jpg'?>" alt="<?php echo $this->translate('Client Management');?>" /><?php echo $this->translate('Client Management');?></h5>
+<p> <?php echo $this->translate(' Lorem ipsum dolor sit amet, consectetuer adipiscingelit. Cras vel orci non mauris consequat tempus.')?></p>
+<div class="txt-c"><form  name="event" action="" method="post"><input name="Client" type="submit" value="Manage" class="optional-button" /></form></div>
+</div>
+<div class="grey-box-botm"></div>
+  </div><?php }?>
+  <br class="clear" />
+ </div>
+

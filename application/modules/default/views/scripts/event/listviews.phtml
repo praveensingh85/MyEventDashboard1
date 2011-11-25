@@ -1,0 +1,137 @@
+<?php
+	$rows  = $this->paginator ;	
+	$sRows  = $this->getvalue ;	
+	
+	/*
+	echo "<pre>";
+		print_r($sRows) ;
+	echo "</pre>";
+	*/
+		 
+?>
+
+	<script language="javascript">
+		function submitfrm()
+		{
+			var  mandatory = '';
+			
+			if(document.frm.lmonth.value == '')
+				mandatory += '- ' + 'Month \n' ;
+			if(document.frm.lyear.value  == '')
+				mandatory += '- ' + 'Year \n' ;
+
+			if(mandatory != '')
+			{
+				alert("Following field(s) can not be left blank \n"+mandatory);
+				return false;
+			}				
+
+			document.frm.submit();
+		}
+    </script>
+
+    <br class="clear">
+    <div class="listview-month">
+   
+      <div class="fr">
+      <form name="frm" action="<?php echo $this->baseUrl().'/event/listviews'?>"  method="post" >
+      <?php
+	  
+	  	  
+		if($_SESSION['getValue']['lyear'] !="")
+			$cYear =$_SESSION['getValue']['lyear'] ;
+ 
+		if($_SESSION['getValue']['lmonth'] !="")
+			$cMonth =$_SESSION['getValue']['lmonth'] ;
+ 
+			
+	   
+	   
+	  ?>
+        <select style="width:115px" name="lmonth" id="lmonth"  onchange="submitfrm();">
+            <option value="" >Select Month</option>
+            <option value="1" <?php if($cMonth == "1") {?> selected="selected" <?php } ?> >January</option>
+            <option value="2" <?php if($cMonth == "2") {?> selected="selected" <?php } ?> >February</option>
+            <option value="3" <?php if($cMonth == "3") {?> selected="selected" <?php } ?> >March</option>
+            <option value="4" <?php if($cMonth == "4") {?> selected="selected" <?php } ?> >April</option>
+            <option value="5" <?php if($cMonth == "5") {?> selected="selected" <?php } ?> >May</option>
+            <option value="6" <?php if($cMonth == "6") {?> selected="selected" <?php } ?> >June</option>
+            <option value="7" <?php if($cMonth == "7") {?> selected="selected" <?php } ?> >July</option>
+            <option value="8" <?php if($cMonth == "8") {?> selected="selected" <?php } ?> >August</option>
+            <option value="9" <?php if($cMonth == "9") {?> selected="selected" <?php } ?> >September</option>
+            <option value="10" <?php if($cMonth == "10") {?> selected="selected" <?php } ?> >October</option>
+            <option value="11" <?php if($cMonth == "11") {?> selected="selected" <?php } ?> >November</option>
+            <option value="12" <?php if($cMonth == "12") {?> selected="selected" <?php } ?> >December</option>
+        </select>
+            
+        <select name="lyear" id="lyear" onchange="submitfrm();">
+            <option value="">Select Year</option>
+        	<?php
+            for($i = 2000 ; $i < 2021 ; $i++)
+			{
+			?>
+            <option value="<?php echo $i ;?>" <?php if($cYear == $i) {?> selected="selected" <?php } ?>  >
+				<?php echo $i ;?>
+            </option>
+            <?php 
+			} 
+			?>
+        </select>
+       </form>   
+      </div>
+      <br class="clear">
+</div>
+    
+ <div class="event-box">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  	  		<?php
+	  		//echo "AAAAAAAAAAAAAAA ".count($rows);
+			if(count($rows) > 0)
+			{
+			?>
+				<tr class="table-heading">
+					<td width="50%"><strong>Event Name</strong></td>
+					<td width="15%"><strong>Start Date</strong></td>
+					<td width="15%"><strong>End Date</strong></td>
+					<td><strong>Country</strong></td>
+				</tr>
+                <?php
+				$date = new Med_Viewhelper_Dateformatstyles ;
+				foreach($rows as $row)
+				{
+					$countryName = '';				
+					if(count($row['Med_Model_Countries']) > 0)
+						$countryName = $row['Med_Model_Countries']['country_name'];
+				?>
+                <tr>
+                    <td><div style="width:350px; word-wrap:break-word;"><a href="<?php echo $this->url(array( 'module'=>'default','controller' => 'event', 'action' => 'view', 'eventid' => $row['event_id'],'prop'=>'yes')); ?>"><?php echo $this->escape($row['event_name']) ;?></a></div></td>
+                    <td><?php echo $this->escape($date->datetimestyle($row['event_start_date'])) ;?></td>
+                    <td><?php echo $this->escape($date->datetimestyle($row['event_end_date'])) ;?></td>
+                    <td><?php echo $this->escape($countryName) ;?></td>
+                </tr>
+				<?php 
+				}// End foreach 
+				?>
+
+				<tr class="bottom-bg">
+					<td colspan="4" align="center">
+						<?php echo $this->paginationControl($this->paginator, 'Sliding',  'listpagination.phtml'); ?>
+					</td>
+				</tr>
+                
+                <?php
+
+			}// End If
+			else
+			{
+			?>
+				<tr> 
+                <td colspan="" style="color:#900" align="center">
+                    <b>No records found !</b>
+                </td>
+				</tr>
+            <?php
+			}// End Else
+        ?>
+        </table>
+    </div>

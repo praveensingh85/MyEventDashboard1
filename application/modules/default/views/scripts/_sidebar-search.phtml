@@ -1,0 +1,219 @@
+<?php 
+	$this->placeholder('sidebar-search')->captureStart() ;
+	$p_objt = BaseController::searchpopulate() ;
+	$js  = $this->baseUrl()."/js/";
+	
+	if(count($_POST) > 0)
+		$sRows  = $_POST ;	
+	else
+		$sRows  = $_SESSION['getValue'];	
+		
+	$action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+	
+	$frmaction = 'listviews';
+	if($action == 'cview')
+		$frmaction = $action ;
+
+?>   
+
+    <link rel="stylesheet" type="text/css"  href="<?php echo $this->baseUrl() ;?>/css/calendar-win2k-cold-1.css" />
+
+	<script type='text/javascript' src='<?php echo $this->baseUrl() ;?>/js/calendar.js'></script>
+ 	 <script type="text/javascript" src="<?php echo $this->baseUrl() ;?>/js/lang/calendar-en.js"></script>
+    <script type='text/javascript' src='<?php echo $this->baseUrl() ;?>/js/calendar-setup.js'></script>
+
+
+     <h2>Search Criteria</h2>
+    <form action="<?php echo $this->baseUrl() ; ?>/event/<?php echo $frmaction ; ?>" method="post" class="search-form">
+    <p>Keyword/Phrase</p>
+    <p>
+    	<label>
+        	<input name="keywords" id="keywords" type="text" value="<?php echo $sRows['keywords']?>" />
+        </label>
+    </p>
+    <p>Event Name</p>
+    <p>
+    	<label>
+        	<input name="eventname" id="eventname" type="text"  value="<?php echo $sRows['eventname']?>"  />
+        </label>
+    </p>
+    
+
+    
+    <p>
+        <span class="padding-right">From</span>
+&nbsp;<input name="datepicker" id="datepicker" type="text" style="width:100px;" value="<?php echo $sRows['datepicker']?>"/>
+&nbsp;<img src="<?php echo $this->baseUrl().'/images/cal.gif'?>" id="f_trigger_a" />
+    </p>
+    <p>
+        <span class="padding-R">To </span>
+<input name="datepicker2" id="datepicker2" type="text" style="width:100px;" value="<?php echo $sRows['datepicker2']?>"/>
+&nbsp;<img src="<?php echo $this->baseUrl().'/images/cal.gif'?>" id="f_trigger_b" />
+    </p>
+
+<script type="text/javascript">
+    Calendar.setup({
+        inputField     :    "datepicker",      // id of the input field
+        ifFormat       :    "%Y-%m-%d",       // format of the input field
+        button         :    "f_trigger_a",   // trigger for the calendar (button ID)
+    });
+</script>
+
+
+<script type="text/javascript">
+    Calendar.setup({
+        inputField     :    "datepicker2",      // id of the input field
+        ifFormat       :    "%Y-%m-%d",       // format of the input field
+        button         :    "f_trigger_b",   // trigger for the calendar (button ID)
+    });
+</script>
+
+     
+     
+    <p>Primary Objective</p>
+    <p>
+    <label>
+    	<select name="primary_objective" id="primary_objective" class="search-form-select">
+            <option value="">All</option>
+	<?php
+    foreach($p_objt['primary_objective'] as $val)
+    {
+    ?>
+<option value="<?php echo $val['id'];?>" <?php if($val['id']==$sRows['primary_objective']) {?> selected="selected" <?php }?> >
+    <?php echo $val['name'];?>
+</option>
+    <?php
+    }
+    ?>
+        </select>
+    </label>
+    </p>
+    <p>Campaign Alignment</p>
+    <p>
+    <label>
+        <select name="campaign_alignment" id="campaign_alignment" class="search-form-select">
+        <option value="">All</option>
+        <?php
+        foreach($p_objt['campaign_alignment'] as $val)
+        {
+        ?>
+<option value="<?php echo $val['id'] ;?>" <?php if($val['id']==$sRows['campaign_alignment']){?> selected="selected" <?php }?> >
+	<?php echo $val['name'] ; ?>
+</option>
+        <?php
+        }
+        ?>
+        </select>
+    </label>
+    </p>
+    <p>Customer Target</p>
+    <p>
+    <label>
+        <select name="customer_target" id="customer_target" class="search-form-select">
+        <option value="">All</option>
+        <?php
+        foreach($p_objt['customer_target'] as $val)
+        {
+        ?>
+    <option value="<?php echo $val['id'] ;?>" <?php if($val['id']==$sRows['customer_target']){?> selected="selected" <?php }?>>
+        <?php echo $val['name'] ;?>
+    </option>
+        <?php
+        }
+        ?>
+        </select>
+    </label>
+    </p>
+    
+    
+    <p>Business Group</p>
+    <p>
+    <label>
+        <select name="business_group" id="business_group" class="search-form-select">
+        <option value="">All</option>
+        <?php
+        foreach($p_objt['business_group'] as $val)
+        {
+        ?>
+<option value="<?php echo $val['id'] ;?>" <?php if($val['id']==$sRows['business_group']){?> selected="selected" <?php }?>>
+    <?php echo $val['name'] ;?>
+</option>
+        <?php
+        }
+        ?>
+        </select>
+    </label>
+    </p>
+
+    <p>Industry/Sectors</p>
+    <p>
+    <label>
+        <select name="industry_sectors" id="industry_sectors" class="search-form-select">
+        <option value="">All</option>
+        <?php
+        foreach($p_objt['industry_sectors'] as $val)
+        {
+        ?>
+<option value="<?php echo $val['id'] ;?>" <?php if($val['id']==$sRows['industry_sectors']){?> selected="selected" <?php }?>>
+    <?php echo $val['name'] ;?>
+</option>
+        <?php
+        }
+        ?>
+        </select>
+    </label>
+    </p>
+    <p>Geography</p>
+    <p>
+    <label>
+        <select name="geography" id="geography" class="search-form-select">
+        <option value="">All</option>
+        <?php
+        foreach($p_objt['geography'] as $val)
+        {
+        ?>
+<option value="<?php echo $val['id'] ;?>"<?php if($val['id']==$sRows['geography']){?> selected="selected" <?php }?>>
+    <?php echo $val['name'] ;?>
+</option>
+        <?php
+        }
+        ?>
+        </select>
+    </label>
+    </p>
+    <p>Event Type</p>
+    <p>
+    <label>
+        <select name="event_type" id="event_type" class="search-form-select">
+        <option value="">All</option>
+        <?php
+        foreach($p_objt['event_type'] as $val)
+        {
+        ?>
+    <option value="<?php echo $val['id'] ;?>"<?php if($val['id']==$sRows['event_type']){?> selected="selected" <?php }?>>
+        <?php echo $val['name'] ;?>
+    </option>
+        <?php
+        }
+        ?>
+        </select>
+    </label>
+    </p>
+    
+    <p>Event Status</p>
+    <p>
+        <label>
+<select name="EventStatus" id="EventStatus" class="search-form-select">
+<option value="">All</option>
+<option value="Considering"<?php if($sRows['EventStatus']=='Considering'){?>selected="selected"<?php }?>>Considering</option>
+<option value="Contracted"<?php if($sRows['EventStatus']=='Contracted'){?> selected="selected" <?php }?>>Contracted</option>
+</select>
+        </label>
+    </p>
+    
+    
+    <p><input type="submit"  name="Search"  class="global-button" value="Search"/></p>
+     </form>
+   
+
+<?php $this->placeholder('sidebar-search')->captureEnd() ?>

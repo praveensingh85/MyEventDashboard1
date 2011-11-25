@@ -1,0 +1,25 @@
+<table width="100%" cellspacing="0" cellpadding="0">
+<?php
+    $datas = $this->data;
+	?>
+    <tr>
+	  <td>Name&nbsp;&nbsp;</td>
+	  <td><?php echo $datas[name]; ?></td>	
+	 </tr> 
+	 <tr>
+	  <td>ID&nbsp;&nbsp;</td>
+	  <td><?php echo $datas[id_str]; ?></td>
+	 </tr> 
+	 <tr>
+	  <td>Screen Name&nbsp;&nbsp;</td> 
+	  <td><?php echo $datas[screen_name]; ?></td>
+	 </tr> 
+	 <tr>
+	  <td>Profile Picture&nbsp;&nbsp;</td> 
+	  <td><img src="<?php echo $datas[profile_image_url];?>"></td>
+	</tr> 
+ <?php 
+ 
+ ?>
+
+  </table>

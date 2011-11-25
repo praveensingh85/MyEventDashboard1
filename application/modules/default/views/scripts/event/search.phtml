@@ -1,0 +1,39 @@
+<div class="outerbox"><div class="innerbox">
+<?php if($this->messages) : ?>
+<div align="center">
+<ul class="errors"><li><?php echo $this->translate(implode("&nbsp;",$this->messages));?></li></ul>
+</div>
+	 <?php endif; ?>
+     <div class="innerbox-top"><?php echo $this->translate('Search');?></div>
+     <div class="innerbox-bg">
+   
+  <div class="exiting-user"><span class="mendatroy-fld">* <?php echo $this->translate('Mandatory Fields');?></span>
+   
+	<h2>Search</h2>
+<?php echo $this->form; ?>
+<h2>Search Results</h2>
+<p><?php echo count($this->results); ?> result(s) found.</p>
+<?php if (count($this->results)): ?>
+<?php $x=1; ?>
+<?php foreach ($this->results as $r): ?>
+<div>
+<?php echo $x; ?>.
+
+<?php echo $this->escape($r->Email); ?>
+<?php //echo $this->escape($r->Name); ?>
+(<?php //echo $this->escape($r->user_source); ?>)
+
+
+</strong>
+</div>
+<br/>
+<?php $x++; ?>
+<?php endforeach; ?>
+<?php endif; ?>
+<div>
+
+</div>
+    </div>
+     </div>
+     <div class="innerbox-botm"></div>
+     </div></div>

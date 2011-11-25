@@ -1,0 +1,31 @@
+<div>
+  <div id="error-image">
+    <img src="<?php echo $this->baseUrl()?>/images/error.gif" />
+  </div>
+  <div id="error-message">
+    <h1><?php echo $this->translate($this->title); ?></h1>
+    <?php echo $this->translate($this->message); ?>
+  </div>
+</div>
+
+<?php if ('development' == APPLICATION_ENV): ?>
+<div id="error-data">
+  <h2>Exception message:</h2>
+  <pre><?php echo $this->exception->getMessage(); ?></pre>
+  
+  <h2>Stack trace:</h2>
+  <pre><?php echo $this->exception->getTraceAsString() ?></pre>
+  
+  <h2>Request method:</h2>
+  <pre><?php echo $this->request->getMethod(); ?></pre>
+  
+  <h2>Request parameters:</h2>
+  <?php Zend_Debug::dump($this->request->getParams()); ?>
+  
+  <h2>Server environment:</h2>
+  <?php Zend_Debug::dump($this->request->getServer()); ?>
+  
+  <h2>System environment:</h2>
+  <?php Zend_Debug::dump($this->request->getEnv()); ?>
+  <?php endif ?>
+</div>
